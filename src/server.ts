@@ -1,6 +1,8 @@
 import mongoose from 'mongoose'
 import app from './app'
 import Routes from './routes/Routes'
+import dotenv from 'dotenv'
+dotenv.config()
 
 const mong_uri = process.env.MONGO_URL
 const port = process.env.PORT
