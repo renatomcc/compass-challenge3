@@ -10,5 +10,6 @@ Routes.post(`${prefix}/users/sign-up`, SignUpController.handle)
   .post(`${prefix}/users/sign-in`, SignInController.handle)
   .post(`${prefix}/events`, EventsController.createEvent)
   .get(`${prefix}/events/:dayOfWeek`, EventsController.getAllEventsByDay)
+  .delete(`${prefix}/events/:dayOfWeek`, EventsController.deleteEventsByDay)
 
 export default Routes
