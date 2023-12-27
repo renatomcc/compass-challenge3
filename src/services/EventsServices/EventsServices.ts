@@ -10,7 +10,7 @@ export default class EventsServices {
     return await EventsRepository.getAllEventsByDay(payload)
   }
   static async deleteEventsByDay(payload: string) {
-    return await EventsRepository.deleteEventsByDay(payload)
+    return await EventsRepository.getEventsById(payload)
   }
   static async getEventsById(req: Request, res: Response) {}
   static async deleteEventsById(req: Request, res: Response) {}
