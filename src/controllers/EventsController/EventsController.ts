@@ -23,5 +23,9 @@ export default class EventsController {
     const event = await EventsServices.getEventById(eventId)
     return res.status(200).json(event)
   }
-  static async deleteEventsById(req: Request, res: Response) {}
+  static async deleteEventsById(req: Request, res: Response) {
+    const eventId: string = req.params.id
+    const result = await EventsServices.getEventById(eventId)
+    return res.status(200).json(result)
+  }
 }
