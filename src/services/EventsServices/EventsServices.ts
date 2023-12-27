@@ -9,7 +9,9 @@ export default class EventsServices {
   static async getAllEventsByDay(payload: string) {
     return await EventsRepository.getAllEventsByDay(payload)
   }
-  static async deleteEventsByDay(req: Request, res: Response) {}
+  static async deleteEventsByDay(payload: string) {
+    return await EventsRepository.deleteEventsByDay(payload)
+  }
   static async getEventsById(req: Request, res: Response) {}
   static async deleteEventsById(req: Request, res: Response) {}
 }
