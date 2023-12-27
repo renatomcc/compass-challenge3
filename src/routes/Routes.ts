@@ -1,6 +1,6 @@
 import express, { Router } from 'express'
-import { SignUpController } from '../controllers/UserController/SignUpController'
-import { SignInController } from '../controllers/UserController/SignInController'
+import SignUpController from '../controllers/UserController/SignUpController'
+import SignInController from '../controllers/UserController/SignInController'
 import EventsController from '../controllers/EventsController/EventsController'
 const Routes: Router = express.Router()
 
