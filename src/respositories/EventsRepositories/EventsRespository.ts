@@ -23,7 +23,10 @@ export default class EventsRepository {
     const events = await Event.find({ dayOfWeek })
     return events
   }
-  static async deleteEventsByDay(req: Request, res: Response) {}
+  static async deleteEventsByDay(dayOfWeek: string) {
+    const result = await Event.deleteMany({ dayOfWeek })
+    return result
+  }
   static async getEventsById(req: Request, res: Response) {}
   static async deleteEventsById(req: Request, res: Response) {}
 }
