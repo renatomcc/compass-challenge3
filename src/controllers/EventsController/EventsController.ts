@@ -9,7 +9,7 @@ export default class EventsController {
     return res.status(200).json({ result })
   }
   static async getAllEventsByDay(req: Request, res: Response) {
-    const dayOfWeek: string = req.body
+    const dayOfWeek: string = req.params.dayOfWeek
     const events = await EventsServices.getAllEventsByDay(dayOfWeek)
     return res.status(200).json({ events })
   }
