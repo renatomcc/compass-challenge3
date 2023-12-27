@@ -4,7 +4,7 @@ import IEvent from '../../interfaces/Event'
 
 export default class EventsController {
   static async createEvent(req: Request, res: Response) {
-    const newEvent: IEvent = req.body;
+    const newEvent: IEvent = req.body
     const result = await EventsServices.createEvent(newEvent)
     return res.status(200).json({ result })
   }
