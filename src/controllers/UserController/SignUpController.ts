@@ -4,8 +4,12 @@ import SignUpService from '../../services/UserServices/SignUpService'
 
 export default class SignUpController {
   static async handle(req: Request, res: Response) {
-    const payload: ISignUpUser = req.body
-    const newUser = await SignUpService.execute(payload)
-    return res.status(200).json({ msg: 'Created.', Client: newUser })
+    try {
+      const payload: ISignUpUser = req.body
+      const { newUser, statusCode } = await SignUpService.execute(payload)
+      return res.status(statusCode).json(newUser)
+    } catch (err) {
+      console.log('deu erro')
+    }
   }
 }
