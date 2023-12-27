@@ -9,8 +9,8 @@ const prefix = '/api/v1'
 Routes.post(`${prefix}/users/sign-up`, SignUpController.handle)
   .post(`${prefix}/users/sign-in`, SignInController.handle)
   .post(`${prefix}/events`, EventsController.createEvent)
-  .get(`${prefix}/events/:dayOfWeek`, EventsController.getAllEventsByDay)
-  .delete(`${prefix}/events/:dayOfWeek`, EventsController.deleteEventsByDay)
+  .get(`${prefix}/events`, EventsController.getAllEventsByDay)
+  .delete(`${prefix}/events`, EventsController.deleteEventsByDay)
   .get(`${prefix}/events/:id`, EventsController.getEventById)
   .delete(`${prefix}/events/:id`, EventsController.deleteEventsById)
 
