@@ -15,5 +15,7 @@ export default class EventsServices {
   static async getEventById(payload: string) {
     return await EventsRepository.getEventById(payload)
   }
-  static async deleteEventById(req: Request, res: Response) {}
+  static async deleteEventById(payload: string) {
+    return await EventsRepository.deleteEventById(payload)
+  }
 }
