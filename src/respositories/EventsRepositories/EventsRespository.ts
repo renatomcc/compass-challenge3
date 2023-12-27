@@ -31,5 +31,8 @@ export default class EventsRepository {
     const result = await Event.findById(eventId)
     return result
   }
-  static async deleteEventById(req: Request, res: Response) {}
+  static async deleteEventById(eventId: string) {
+    const result = await Event.findByIdAndDelete(eventId)
+    return result
+  }
 }
