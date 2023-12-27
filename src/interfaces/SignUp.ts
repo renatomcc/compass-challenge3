@@ -1,4 +1,4 @@
-export default interface ISignUpUser {
+export default interface ISignUpUser extends Document {
   firstName: 'string'
   lastName: 'string'
   birthDate: Date
@@ -7,4 +7,5 @@ export default interface ISignUpUser {
   email: 'string'
   password: 'string'
   confirmPassword: 'string'
+  generateAuthToken(): string;
 }
