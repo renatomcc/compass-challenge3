@@ -1,5 +1,5 @@
-import ISignUpUser from '../interfaces/SignUp'
-import SignUpRespository from '../respositories/SignUpRespository'
+import ISignUpUser from '../../interfaces/SignUp'
+import SignUpRespository from '../../respositories/UserRespositories/SignUpRespository'
 import jwt from 'jsonwebtoken'
 
 export default class SignUpService {

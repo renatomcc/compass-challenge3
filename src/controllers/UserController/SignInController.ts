@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
-import ISignInUser from '../interfaces/SignIn'
-import SignInService from '../services/SignInService'
+import ISignInUser from '../../interfaces/SignIn'
+import SignInService from '../../services/UserServices/SignInService'
 
 class SignInController {
   static async handle(req: Request, res: Response) {

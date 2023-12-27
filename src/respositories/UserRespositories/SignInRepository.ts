@@ -1,11 +1,11 @@
-import ISignInUser from '../interfaces/SignIn'
-import ISignUpUser from '../interfaces/SignUp'
-import Client from '../model/User'
+import ISignInUser from '../../interfaces/SignIn'
+import ISignUpUser from '../../interfaces/SignUp'
+import User from '../../model/User'
 import bcrypt from 'bcrypt'
 
 export default class SignInRepository {
   static async login(user: ISignInUser) {
-    const existingUser: ISignUpUser | null = await Client.findOne({
+    const existingUser: ISignUpUser | null = await User.findOne({
       email: user.email,
     })
     if (existingUser) {

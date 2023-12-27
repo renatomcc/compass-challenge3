@@ -21,6 +21,6 @@ userSchema.pre('save', async function () {
   this.confirmPassword = this.password
 })
 
-const Client = mongoose.model<Document>('Client', userSchema)
+const User = mongoose.model<Document>('User', userSchema)
 
-export default Client
+export default User
