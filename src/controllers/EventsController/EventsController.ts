@@ -9,12 +9,13 @@ export default class EventsController {
     return res.status(200).json({ result })
   }
   static async getAllEventsByDay(req: Request, res: Response) {
-    const dayOfWeek: string = req.params.dayOfWeek
+    const dayOfWeek: string = String(req.query.dayOfWeek)
     const events = await EventsServices.getAllEventsByDay(dayOfWeek)
     return res.status(200).json({ events })
   }
   static async deleteEventsByDay(req: Request, res: Response) {
-    const dayOfWeek: string = req.params.dayOfWeek
+    const dayOfWeek: string = String(req.query.dayOfWeek)
+    console.log(dayOfWeek)
     const events = await EventsServices.deleteEventsByDay(dayOfWeek)
     return res.status(200).json({ events })
   }
