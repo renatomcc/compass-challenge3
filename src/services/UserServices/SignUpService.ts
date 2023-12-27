@@ -1,15 +1,21 @@
+import CustomError from '../../errors/CustomError'
 import ISignUpUser from '../../interfaces/SignUp'
 import SignUpRespository from '../../respositories/UserRespositories/SignUpRepository'
 import UserValidator from '../../validation/UserValidator'
 
 export default class SignUpService {
   static async execute(payload: ISignUpUser) {
-    const newUser = await SignUpRespository.createUser(payload)
     const validationResponse = UserValidator(payload)
-    if (validationResponse.errors) {
-      const validationErrors = validationResponse.errors
-      return { type: 'Validation error', validationErrors, statusCode: 422 }
+
+    if (validationResponse.statusCode !== 200) {
+      throw new CustomError(
+        validationResponse.type || 'UnknownError',
+        validationResponse.errors,
+        validationResponse.statusCode,
+      )
     }
-    return { newUser, statusCode: 200 }
+
+    const newUser = await SignUpRespository.createUser(payload)
+    return newUser
   }
 }
