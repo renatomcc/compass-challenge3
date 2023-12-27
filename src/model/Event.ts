@@ -1,5 +1,4 @@
 import mongoose, { Schema, Document } from 'mongoose'
-import bcrypt from 'bcrypt'
 
 const eventSchema = new Schema({
   description: 'string',
