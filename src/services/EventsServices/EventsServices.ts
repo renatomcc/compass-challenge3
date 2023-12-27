@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 import IEvent from '../../interfaces/Event'
-import EventsRepository from '../../respositories/EventsRepositories/EventsRespository'
+import EventsRepository from '../../respositories/EventsRepositories/EventsRepository'
 
 export default class EventsServices {
   static async createEvent(payload: IEvent) {
