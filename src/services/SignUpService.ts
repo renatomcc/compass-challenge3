@@ -1,6 +1,9 @@
 import ISignUpUser from '../interfaces/SignUp'
-class SignUpService {
-  execute(payload: ISignUpUser) {}
-}
+import SignUpRespository from '../respositories/SignUpRespository'
 
-export default { SignUpService }
+export default class SignUpService {
+  static async execute(payload: ISignUpUser) {
+    const newUser = await SignUpRespository.createUser(payload)
+    return newUser
+  }
+}
