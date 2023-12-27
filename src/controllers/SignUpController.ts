@@ -4,9 +4,9 @@ import SignUpService from '../services/SignUpService'
 
 class SignUpController {
   static async handle(req: Request, res: Response) {
-    const newUser: ISignUpUser = req.body
-    await SignUpService.execute(newUser)
-    return res.status(200).json({ Client: newUser, msg: 'Created.' })
+    const payload: ISignUpUser = req.body
+    const { newUser, token } = await SignUpService.execute(payload)
+    return res.status(200).json({ msg: 'Created.', Client: newUser, token })
   }
 }
 

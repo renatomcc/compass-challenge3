@@ -7,5 +7,4 @@ export default interface ISignUpUser extends Document {
   email: 'string'
   password: 'string'
   confirmPassword: 'string'
-  generateAuthToken(): string;
 }

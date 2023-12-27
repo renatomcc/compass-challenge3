@@ -5,9 +5,8 @@ import jwt from 'jsonwebtoken'
 export default class SignUpService {
   static async execute(payload: ISignUpUser) {
     const newUser = await SignUpRespository.createUser(payload)
-    console.log(newUser._id)
-    // const token = jwt.sign({ newUser }, process.env.SECRET!)
-    // console.log(token)
-    return newUser
+    const newUserId = newUser._id
+    const token = jwt.sign({ newUserId }, process.env.SECRET!)
+    return { newUser, token }
   }
 }
