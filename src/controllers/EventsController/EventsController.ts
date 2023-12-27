@@ -25,7 +25,7 @@ export default class EventsController {
   }
   static async deleteEventsById(req: Request, res: Response) {
     const eventId: string = req.params.id
-    const result = await EventsServices.getEventById(eventId)
+    const result = await EventsServices.deleteEventById(eventId)
     return res.status(200).json(result)
   }
 }
