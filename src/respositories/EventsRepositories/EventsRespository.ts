@@ -1,6 +1,4 @@
-import { Request, Response } from 'express'
-
-export default class EventsController {
+export default class EventsRepository {
   static async createEvent(req: Request, res: Response) {}
   static async getAllEventsByDay(req: Request, res: Response) {}
   static async deleteEventsByDay(req: Request, res: Response) {}
