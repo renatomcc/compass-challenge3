@@ -6,7 +6,6 @@ export default class SignUpService {
   static async execute(payload: ISignUpUser) {
     const newUser = await SignUpRespository.createUser(payload)
     const newUserId = newUser._id
-    const token = jwt.sign({ newUserId }, process.env.SECRET!)
-    return { newUser, token }
+    return newUser
   }
 }
