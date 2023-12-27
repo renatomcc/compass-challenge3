@@ -18,6 +18,10 @@ export default class EventsController {
     const events = await EventsServices.deleteEventsByDay(dayOfWeek)
     return res.status(200).json({ events })
   }
-  static async getEventsById(req: Request, res: Response) {}
+  static async getEventsById(req: Request, res: Response) {
+    const eventId: string = req.params.id
+    const event = await EventsServices.getEventById(eventId)
+    return res.status(200).json(event)
+  }
   static async deleteEventsById(req: Request, res: Response) {}
 }
