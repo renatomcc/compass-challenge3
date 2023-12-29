@@ -5,9 +5,7 @@ import EventsRepository from '../../respositories/EventsRepositories/EventsRepos
 export default class EventsServices {
   static async createEvent(payload: IEvent) {
     const newEvent = await EventsRepository.createEvent(payload)
-    const newEventId = newEvent.id
-    const token = jwt.sign({ newEventId }, process.env.SECRET!)
-    return { newEvent, token }
+    return newEvent
   }
   static async getAllEventsByDay(payload: string) {
     return await EventsRepository.getAllEventsByDay(payload)
