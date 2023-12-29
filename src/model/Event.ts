@@ -1,10 +1,17 @@
 import mongoose, { Schema, Document } from 'mongoose'
 
-const eventSchema = new Schema({
+interface IEventDocument extends Document {
+  description: string
+  dayOfWeek: string
+  userId: string
+}
+
+const eventSchema = new Schema<IEventDocument>({
   description: 'string',
   dayOfWeek: 'string',
+  userId: 'string',
 })
 
-const Event = mongoose.model<Document>('Event', eventSchema)
+const Event = mongoose.model<IEventDocument>('Event', eventSchema)
 
 export default Event

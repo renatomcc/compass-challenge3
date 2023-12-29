@@ -7,16 +7,37 @@ interface ValidationError {
 }
 
 export default function EventValidator(payload: IEvent) {
-  const schema = Joi.object<IEvent>({
-    description: Joi.string().required(),
-    dayOfWeek: Joi.string().required(),
-  })
-    .options({
-      abortEarly: false,
-    })
-    .messages({})
+  const validDaysOfWeek = [
+    'sunday',
+    'monday',
+    'tuesday',
+    'wednesday',
+    'thursday',
+    'friday',
+    'saturday',
+  ]
 
-  const validationResult = schema.validate(payload)
+  const schema = Joi.object<IEvent>({
+    description: Joi.string().required().messages({
+      'string.base': '{{#label}} must be a string',
+      'any.required': '{{#label}} is required',
+    }),
+    dayOfWeek: Joi.string()
+      .valid(...validDaysOfWeek.map((day) => day.toLowerCase()))
+      .required()
+      .messages({
+        'string.base': '{{#label}} must be a string',
+        'any.only': '{{#label}} must be a valid day of the week',
+        'any.required': '{{#label}} is required',
+      }),
+  }).options({
+    abortEarly: false,
+  })
+
+  const validationResult = schema.validate({
+    ...payload,
+    dayOfWeek: payload.dayOfWeek?.toLowerCase(),
+  })
 
   if (validationResult.error) {
     const errors: ValidationError[] = validationResult.error.details.map(

@@ -10,7 +10,7 @@ export default class EventsController {
       const newEvent: IEvent = req.body
       const token: string = String(req.headers.authorization?.split(' ')[1])
       const result = await EventsServices.createEvent(newEvent, token)
-      return res.status(200).json({ result })
+      return res.status(200).json(result)
     } catch (err) {
       if (err instanceof CustomError) {
         return res
