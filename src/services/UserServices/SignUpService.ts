@@ -1,11 +1,11 @@
 import CustomError from '../../errors/CustomError'
 import ISignUpUser from '../../interfaces/SignUp'
 import SignUpRespository from '../../respositories/UserRespositories/SignUpRepository'
-import UserValidator from '../../validation/UserValidator'
+import SignUpValidator from '../../validation/SignUpValidator'
 
 export default class SignUpService {
   static async execute(payload: ISignUpUser) {
-    const validationResponse = UserValidator(payload)
+    const validationResponse = SignUpValidator(payload)
 
     if (validationResponse.statusCode !== 200) {
       throw new CustomError(

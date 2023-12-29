@@ -6,7 +6,7 @@ interface ValidationError {
   message: string
 }
 
-export default function UserValidator(payload: ISignUpUser) {
+export default function SignUpValidator(payload: ISignUpUser) {
   const birthDateLimit = new Date()
   birthDateLimit.setFullYear(birthDateLimit.getFullYear() - 150)
 

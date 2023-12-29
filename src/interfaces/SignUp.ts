@@ -1,4 +1,5 @@
 export default interface ISignUpUser extends Document {
+  _id: 'string'
   firstName: 'string'
   lastName: 'string'
   birthDate: Date
