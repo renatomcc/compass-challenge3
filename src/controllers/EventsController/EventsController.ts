@@ -5,7 +5,8 @@ import IEvent from '../../interfaces/Event'
 export default class EventsController {
   static async createEvent(req: Request, res: Response) {
     const newEvent: IEvent = req.body
-    const result = await EventsServices.createEvent(newEvent)
+    const token: string = String(req.headers.authorization?.split(' ')[1])
+    const result = await EventsServices.createEvent(newEvent, token)
     return res.status(200).json({ result })
   }
   static async getAllEventsByDay(req: Request, res: Response) {
