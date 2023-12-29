@@ -2,6 +2,7 @@ import CustomError from '../../errors/CustomError'
 import IEvent from '../../interfaces/Event'
 import EventsRepository from '../../respositories/EventsRepositories/EventsRepository'
 import CreateEventValidator from '../../validation/EventsValidation/CreateEventValidator'
+import GetAllEventsByDayValidator from '../../validation/EventsValidation/GetAllEventsByDayValidator'
 import jwt, { JwtPayload } from 'jsonwebtoken'
 
 export default class EventsServices {
@@ -33,7 +34,17 @@ export default class EventsServices {
   }
 
   static async getAllEventsByDay(payload: string, token: string) {
-    return await EventsRepository.getAllEventsByDay(payload)
+    const validationResponse = GetAllEventsByDayValidator(payload)
+    const decodedToken = jwt.verify(token, process.env.SECRET!) as JwtPayload
+    const userId = decodedToken.userId
+    if (validationResponse.statusCode !== 200) {
+      throw new CustomError(
+        validationResponse.type || 'ValidationError',
+        validationResponse.errors,
+        validationResponse.statusCode,
+      )
+    }
+    return await EventsRepository.getAllEventsByDay(payload, userId)
   }
   static async deleteEventsByDay(payload: string) {
     return await EventsRepository.deleteEventsByDay(payload)
