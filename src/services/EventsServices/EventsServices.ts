@@ -1,12 +1,12 @@
 import CustomError from '../../errors/CustomError'
 import IEvent from '../../interfaces/Event'
 import EventsRepository from '../../respositories/EventsRepositories/EventsRepository'
-import EventValidator from '../../validation/EventsValidation/CreateEventValidator'
+import CreateEventValidator from '../../validation/EventsValidation/CreateEventValidator'
 import jwt, { JwtPayload } from 'jsonwebtoken'
 
 export default class EventsServices {
   static async createEvent(payload: IEvent, token: string) {
-    const validationResponse = EventValidator(payload)
+    const validationResponse = CreateEventValidator(payload)
 
     if (validationResponse.statusCode !== 200) {
       throw new CustomError(

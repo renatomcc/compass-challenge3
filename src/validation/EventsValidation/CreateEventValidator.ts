@@ -6,7 +6,7 @@ interface ValidationError {
   message: string
 }
 
-export default function EventValidator(payload: IEvent) {
+export default function CreateEventValidator(payload: IEvent) {
   const validDaysOfWeek = [
     'sunday',
     'monday',
