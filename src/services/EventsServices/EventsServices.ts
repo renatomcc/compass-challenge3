@@ -4,6 +4,7 @@ import EventsRepository from '../../respositories/EventsRepositories/EventsRepos
 import CreateEventValidator from '../../validation/EventsValidation/CreateEventValidator'
 import GetAllEventsByDayValidator from '../../validation/EventsValidation/GetAllEventsByDayValidator'
 import jwt, { JwtPayload } from 'jsonwebtoken'
+import { DeleteResult } from 'mongodb'
 
 export default class EventsServices {
   static async createEvent(payload: IEvent, token: string) {
@@ -57,7 +58,12 @@ export default class EventsServices {
         validationResponse.statusCode,
       )
     }
-    return await EventsRepository.deleteEventsByDay(payload, userId)
+    const deletedEvents = await EventsRepository.deleteEventsByDay(
+      payload,
+      userId,
+    )
+
+    return deletedEvents
   }
   static async getEventById(payload: string) {
     return await EventsRepository.getEventById(payload)
