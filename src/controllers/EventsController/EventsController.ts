@@ -39,10 +39,20 @@ export default class EventsController {
     }
   }
   static async deleteEventsByDay(req: Request, res: Response) {
-    const dayOfWeek: string = String(req.query.dayOfWeek)
-    console.log(dayOfWeek)
-    const events = await EventsServices.deleteEventsByDay(dayOfWeek)
-    return res.status(200).json({ events })
+    try {
+      const dayOfWeek: string = String(req.query.dayOfWeek)
+      const token: string = String(req.headers.authorization?.split(' ')[1])
+      const events = await EventsServices.deleteEventsByDay(dayOfWeek, token)
+      return res.status(200).json(events)
+    } catch (err) {
+      if (err instanceof CustomError) {
+        return res
+          .status(err.statusCode)
+          .json({ type: err.type, errors: err.errors })
+      } else {
+        return res.status(500).json({ message: 'Internal Server Error' })
+      }
+    }
   }
   static async getEventById(req: Request, res: Response) {
     const eventId: string = req.params.id
