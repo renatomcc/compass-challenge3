@@ -26,7 +26,7 @@ export default class EventsController {
     try {
       const dayOfWeek: string = String(req.query.dayOfWeek)
       const token: string = String(req.headers.authorization?.split(' ')[1])
-      const events = await EventsServices.getAllEventsByDay(dayOfWeek)
+      const events = await EventsServices.getAllEventsByDay(dayOfWeek, token)
       return res.status(200).json(events)
     } catch (err) {
       if (err instanceof CustomError) {

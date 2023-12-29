@@ -1,5 +1,5 @@
 import Joi from 'joi'
-import ISignUpUser from '../interfaces/SignUp'
+import ISignUpUser from '../../interfaces/SignUp'
 
 interface ValidationError {
   resource: string

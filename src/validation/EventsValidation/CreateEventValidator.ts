@@ -1,5 +1,5 @@
 import Joi from 'joi'
-import IEvent from '../interfaces/Event'
+import IEvent from '../../interfaces/Event'
 
 interface ValidationError {
   resource: string

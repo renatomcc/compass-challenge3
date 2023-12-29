@@ -3,7 +3,7 @@ import SignInRepository from '../../respositories/UserRespositories/SignInReposi
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 import CustomError from '../../errors/CustomError'
-import SignInValidator from '../../validation/SignInValidator'
+import SignInValidator from '../../validation/UserValidation/SignInValidator'
 
 export default class SignInService {
   static async execute(payload: ISignInUser) {

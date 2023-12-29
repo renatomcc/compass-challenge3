@@ -1,7 +1,7 @@
 import CustomError from '../../errors/CustomError'
 import IEvent from '../../interfaces/Event'
 import EventsRepository from '../../respositories/EventsRepositories/EventsRepository'
-import EventValidator from '../../validation/EventValidator'
+import EventValidator from '../../validation/EventsValidation/CreateEventValidator'
 import jwt, { JwtPayload } from 'jsonwebtoken'
 
 export default class EventsServices {
@@ -32,7 +32,7 @@ export default class EventsServices {
     return formattedResult
   }
 
-  static async getAllEventsByDay(payload: string) {
+  static async getAllEventsByDay(payload: string, token: string) {
     return await EventsRepository.getAllEventsByDay(payload)
   }
   static async deleteEventsByDay(payload: string) {

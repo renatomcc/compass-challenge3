@@ -14,9 +14,25 @@ Routes.post(`${prefix}/users/sign-up`, SignUpController.handle)
     authenticationMiddleware,
     EventsController.createEvent,
   )
-  .get(`${prefix}/events`, EventsController.getAllEventsByDay)
-  .delete(`${prefix}/events`, EventsController.deleteEventsByDay)
-  .get(`${prefix}/events/:id`, EventsController.getEventById)
-  .delete(`${prefix}/events/:id`, EventsController.deleteEventsById)
+  .get(
+    `${prefix}/events`,
+    authenticationMiddleware,
+    EventsController.getAllEventsByDay,
+  )
+  .delete(
+    `${prefix}/events`,
+    authenticationMiddleware,
+    EventsController.deleteEventsByDay,
+  )
+  .get(
+    `${prefix}/events/:id`,
+    authenticationMiddleware,
+    EventsController.getEventById,
+  )
+  .delete(
+    `${prefix}/events/:id`,
+    authenticationMiddleware,
+    EventsController.deleteEventsById,
+  )
 
 export default Routes
