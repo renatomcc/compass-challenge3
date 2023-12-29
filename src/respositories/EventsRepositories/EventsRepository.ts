@@ -15,9 +15,9 @@ export default class EventsRepository {
     const events = await Event.find({ dayOfWeek, userId })
     return events
   }
-  static async deleteEventsByDay(dayOfWeek: string) {
-    const result = await Event.deleteMany({ dayOfWeek })
-    return result
+  static async deleteEventsByDay(dayOfWeek: string, userId: string) {
+    const events = await Event.deleteMany({ dayOfWeek, userId })
+    return events
   }
   static async getEventById(eventId: string) {
     const result = await Event.findById(eventId)
