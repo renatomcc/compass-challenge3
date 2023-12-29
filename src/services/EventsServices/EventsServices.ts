@@ -46,8 +46,18 @@ export default class EventsServices {
     }
     return await EventsRepository.getAllEventsByDay(payload, userId)
   }
-  static async deleteEventsByDay(payload: string) {
-    return await EventsRepository.deleteEventsByDay(payload)
+  static async deleteEventsByDay(payload: string, token: string) {
+    const validationResponse = GetAllEventsByDayValidator(payload)
+    const decodedToken = jwt.verify(token, process.env.SECRET!) as JwtPayload
+    const userId = decodedToken.userId
+    if (validationResponse.statusCode !== 200) {
+      throw new CustomError(
+        validationResponse.type || 'ValidationError',
+        validationResponse.errors,
+        validationResponse.statusCode,
+      )
+    }
+    return await EventsRepository.deleteEventsByDay(payload, userId)
   }
   static async getEventById(payload: string) {
     return await EventsRepository.getEventById(payload)
