@@ -16,33 +16,20 @@ export default class EventsServices {
       )
     }
 
-    try {
-      const decodedToken = jwt.verify(token, process.env.SECRET!) as JwtPayload
-      const newEvent = await EventsRepository.createEvent(
-        payload,
-        decodedToken.userId,
-      )
+    const decodedToken = jwt.verify(token, process.env.SECRET!) as JwtPayload
+    const newEvent = await EventsRepository.createEvent(
+      payload,
+      decodedToken.userId,
+    )
 
-      const formattedResult = {
-        _id: newEvent._id,
-        description: newEvent.description,
-        dayOfWeek: newEvent.dayOfWeek,
-        userId: newEvent.userId,
-      }
-
-      return formattedResult
-    } catch (error) {
-      throw new CustomError(
-        'AuthenticationError',
-        [
-          {
-            resource: 'token',
-            message: 'Invalid token.',
-          },
-        ],
-        500,
-      )
+    const formattedResult = {
+      _id: newEvent._id,
+      description: newEvent.description,
+      dayOfWeek: newEvent.dayOfWeek,
+      userId: newEvent.userId,
     }
+
+    return formattedResult
   }
 
   static async getAllEventsByDay(payload: string) {
