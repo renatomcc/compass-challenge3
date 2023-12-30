@@ -65,7 +65,15 @@ export default class EventsServices {
 
     return deletedEvents
   }
-  static async getEventById(payload: string) {
+  static async getEventById(payload: string, token: string) {
+    const validationResponse = GetAllEventsByDayValidator(payload)
+    if (validationResponse.statusCode !== 200) {
+      throw new CustomError(
+        validationResponse.type || 'ValidationError',
+        validationResponse.errors,
+        validationResponse.statusCode,
+      )
+    }
     return await EventsRepository.getEventById(payload)
   }
   static async deleteEventById(payload: string) {
