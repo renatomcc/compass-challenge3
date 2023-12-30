@@ -4,7 +4,7 @@ import EventsRepository from '../../respositories/EventsRepositories/EventsRepos
 import CreateEventValidator from '../../validation/EventsValidation/CreateEventValidator'
 import GetAllEventsByDayValidator from '../../validation/EventsValidation/GetAllEventsByDayValidator'
 import jwt, { JwtPayload } from 'jsonwebtoken'
-import { DeleteResult } from 'mongodb'
+import GetEventByIdValidator from '../../validation/EventsValidation/GetEventByIdValidator'
 
 export default class EventsServices {
   static async createEvent(payload: IEvent, token: string) {
@@ -66,7 +66,7 @@ export default class EventsServices {
     return deletedEvents
   }
   static async getEventById(payload: string, token: string) {
-    const validationResponse = GetAllEventsByDayValidator(payload)
+    const validationResponse = await GetEventByIdValidator(payload)
     if (validationResponse.statusCode !== 200) {
       throw new CustomError(
         validationResponse.type || 'ValidationError',
