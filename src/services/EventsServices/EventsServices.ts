@@ -62,7 +62,6 @@ export default class EventsServices {
       payload,
       userId,
     )
-
     return deletedEvents
   }
   static async getEventById(payload: string, token: string) {
@@ -76,7 +75,15 @@ export default class EventsServices {
     }
     return await EventsRepository.getEventById(payload)
   }
-  static async deleteEventById(payload: string) {
+  static async deleteEventById(payload: string, token: string) {
+    const validationResponse = await GetEventByIdValidator(payload)
+    if (validationResponse.statusCode !== 200) {
+      throw new CustomError(
+        validationResponse.type || 'ValidationError',
+        validationResponse.errors,
+        validationResponse.statusCode,
+      )
+    }
     return await EventsRepository.deleteEventById(payload)
   }
 }
