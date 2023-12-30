@@ -22,6 +22,7 @@ async function connect() {
             console.log(`Server running on port: ${port}`)
           })
         }
+        app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
         app.use('/', Routes)
       })
       .catch((err) => console.log(err))
