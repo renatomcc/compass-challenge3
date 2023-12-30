@@ -1,9 +1,5 @@
 import Joi from 'joi'
-
-interface ValidationError {
-  resource: string
-  message: string
-}
+import ValidationError from '../../errors/ValidationError'
 
 export default function GetAllEventsByDayValidator(dayOfWeek: string) {
   const validDaysOfWeek = [

@@ -1,10 +1,6 @@
 import Joi from 'joi'
 import IEvent from '../../interfaces/Event'
-
-interface ValidationError {
-  resource: string
-  message: string
-}
+import ValidationError from '../../errors/ValidationError'
 
 export default function CreateEventValidator(payload: IEvent) {
   const validDaysOfWeek = [

@@ -1,10 +1,6 @@
 import Joi from 'joi'
 import ISignInUser from '../../interfaces/SignIn'
-
-interface ValidationError {
-  resource: string
-  message: string
-}
+import ValidationError from '../../errors/ValidationError'
 
 export default function SignInValidator(payload: ISignInUser) {
   const schema = Joi.object<ISignInUser>({

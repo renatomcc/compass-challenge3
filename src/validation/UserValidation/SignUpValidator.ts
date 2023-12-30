@@ -1,11 +1,7 @@
 import Joi from 'joi'
 import ISignUpUser from '../../interfaces/SignUp'
 import User from '../../model/User'
-
-interface ValidationError {
-  resource: string
-  message: string
-}
+import ValidationError from '../../errors/ValidationError'
 
 export default async function SignUpValidator(payload: ISignUpUser) {
   const birthDateLimit = new Date()
