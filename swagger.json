@@ -131,7 +131,7 @@
     },
     "/api/v1/events": {
       "post": {
-        "summary": "Create a new event",
+        "summary": "Create an event",
         "security": [
           {
             "BearerAuth": []
@@ -142,13 +142,67 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/Event"
+              },
+              "example": {
+                "description": "Show",
+                "dayOfWeek": "sunday"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Event created successfully"
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "example": {
+                  "_id": "generated_id",
+                  "description": "Show",
+                  "dayOfWeek": "sunday",
+                  "userId": "user_id"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "example": {
+                  "type": "Validation Error",
+                  "errors": [
+                    {
+                      "resource": "dayOfWeek",
+                      "message": "\"dayOfWeek\" must be a valid day of the week"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "statusCode": 401,
+                  "error": "Unauthorized",
+                  "message": "Not Authenticated"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "statusCode": 500,
+                  "error": "Internal Server Error",
+                  "message": "Something went wrong"
+                }
+              }
+            }
           }
         }
       },
