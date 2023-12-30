@@ -545,8 +545,69 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Event deleted successfully"
+          "204": {
+            "description": "Event deleted"
+          },
+          "400": {
+            "description": "Invalid data supplied",
+            "content": {
+              "application/json": {
+                "example": {
+                  "type": "Validation Error",
+                  "errors": [
+                    {
+                      "resource": "id",
+                      "message": "Invalid ObjectId"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "type": "AuthenticationError",
+                  "errors": [
+                    {
+                      "resource": "token",
+                      "message": "Invalid token."
+                    }
+                  ],
+                  "statusCode": 401
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Event not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "type": "Not Found",
+                  "errors": [
+                    {
+                      "resource": "id",
+                      "message": "Event not found"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "statusCode": 500,
+                  "error": "Internal Server Error",
+                  "message": "Something went wrong"
+                }
+              }
+            }
           }
         }
       }
