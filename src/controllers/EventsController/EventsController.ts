@@ -55,9 +55,20 @@ export default class EventsController {
     }
   }
   static async getEventById(req: Request, res: Response) {
-    const eventId: string = req.params.id
-    const event = await EventsServices.getEventById(eventId)
-    return res.status(200).json(event)
+    try {
+      const eventId: string = req.params.id
+      const token: string = String(req.headers.authorization?.split(' ')[1])
+      const event = await EventsServices.getEventById(eventId, token)
+      return res.status(200).json(event)
+    } catch (err) {
+      if (err instanceof CustomError) {
+        return res
+          .status(err.statusCode)
+          .json({ type: err.type, errors: err.errors })
+      } else {
+        return res.status(500).json({ message: 'Internal Server Error' })
+      }
+    }
   }
   static async deleteEventsById(req: Request, res: Response) {
     const eventId: string = req.params.id
