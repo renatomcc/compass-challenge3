@@ -1,12 +1,13 @@
 import Joi from 'joi'
 import ISignUpUser from '../../interfaces/SignUp'
+import User from '../../model/User'
 
 interface ValidationError {
   resource: string
   message: string
 }
 
-export default function SignUpValidator(payload: ISignUpUser) {
+export default async function SignUpValidator(payload: ISignUpUser) {
   const birthDateLimit = new Date()
   birthDateLimit.setFullYear(birthDateLimit.getFullYear() - 150)
 
@@ -45,5 +46,16 @@ export default function SignUpValidator(payload: ISignUpUser) {
     return { type: 'Validation error', errors, statusCode: 422 }
   }
 
+  const existingEmail = await User.findOne({ email: payload.email })
+  if (existingEmail) {
+    const errors: ValidationError[] = [
+      {
+        resource: 'email',
+        message: 'Email is already in use',
+      },
+    ]
+
+    return { type: 'Validation error', errors, statusCode: 422 }
+  }
   return { statusCode: 200 }
 }

@@ -5,7 +5,7 @@ import SignUpValidator from '../../validation/UserValidation/SignUpValidator'
 
 export default class SignUpService {
   static async execute(payload: ISignUpUser) {
-    const validationResponse = SignUpValidator(payload)
+    const validationResponse = await SignUpValidator(payload)
 
     if (validationResponse.statusCode !== 200) {
       throw new CustomError(
