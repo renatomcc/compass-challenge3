@@ -2,6 +2,8 @@ import mongoose from 'mongoose'
 import app from './app'
 import Routes from './routes/Routes'
 import dotenv from 'dotenv'
+import swaggerUi from 'swagger-ui-express'
+import swaggerDocs from '../swagger.json'
 dotenv.config()
 
 const mong_uri = process.env.MONGO_URL
