@@ -44,7 +44,20 @@ export default class EventsServices {
         validationResponse.statusCode,
       )
     }
-    return await EventsRepository.getAllEventsByDay(payload, userId)
+    const events = await EventsRepository.getAllEventsByDay(payload, userId)
+    if (!events.length) {
+      throw new CustomError(
+        'Not Found',
+        [
+          {
+            resource: 'dayOfWeek',
+            message: 'No events found on this day',
+          },
+        ],
+        404,
+      )
+    }
+    return events
   }
   static async deleteEventsByDay(payload: string, token: string) {
     const validationResponse = CheckEventsByDayValidator(payload)
