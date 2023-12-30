@@ -11,9 +11,20 @@
       "description": "Local server"
     }
   ],
+  "tags": [
+    {
+      "name": "User",
+      "description": "User routes"
+    },
+    {
+      "name": "Event",
+      "description": "Event routes"
+    }
+  ],
   "paths": {
     "/api/v1/users/sign-up": {
       "post": {
+        "tags": ["User"],
         "summary": "Create a new user",
         "requestBody": {
           "content": {
@@ -71,6 +82,7 @@
     },
     "/api/v1/users/sign-in": {
       "post": {
+        "tags": ["User"],
         "summary": "Login of an existing user",
         "requestBody": {
           "content": {
@@ -131,6 +143,7 @@
     },
     "/api/v1/events": {
       "post": {
+        "tags": ["Event"],
         "summary": "Create an event",
         "security": [
           {
@@ -207,6 +220,7 @@
         }
       },
       "get": {
+        "tags": ["Event"],
         "summary": "Get events",
         "security": [
           {
@@ -322,6 +336,7 @@
         }
       },
       "delete": {
+        "tags": ["Event"],
         "summary": "Delete events by day",
         "security": [
           {
@@ -432,6 +447,7 @@
     },
     "/api/v1/events/{id}": {
       "get": {
+        "tags": ["Event"],
         "summary": "Get event by ID",
         "security": [
           {
@@ -527,6 +543,7 @@
         }
       },
       "delete": {
+        "tags": ["Event"],
         "summary": "Delete event by ID",
         "security": [
           {
@@ -670,6 +687,90 @@
             "type": "string"
           },
           "dayOfWeek": {
+            "type": "string"
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        }
+      },
+      "LoginResponse": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        }
+      },
+      "EventDetails": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "dayOfWeek": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          }
+        }
+      },
+      "ValidationError": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "resource": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "ServerError": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer"
+          },
+          "error": {
+            "type": "string"
+          },
+          "message": {
             "type": "string"
           }
         }
