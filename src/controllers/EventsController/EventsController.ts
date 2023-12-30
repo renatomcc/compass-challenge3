@@ -75,7 +75,7 @@ export default class EventsController {
       const eventId: string = req.params.id
       const token: string = String(req.headers.authorization?.split(' ')[1])
       const event = await EventsServices.deleteEventById(eventId, token)
-      return res.status(200).json(event)
+      return res.status(204).json(event)
     } catch (err) {
       if (err instanceof CustomError) {
         return res
