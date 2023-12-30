@@ -1,7 +1,7 @@
 import Joi from 'joi'
 import ValidationError from '../../errors/ValidationError'
 
-export default function GetAllEventsByDayValidator(dayOfWeek: string) {
+export default function CheckEventsByDayValidator(dayOfWeek: string) {
   const validDaysOfWeek = [
     'sunday',
     'monday',

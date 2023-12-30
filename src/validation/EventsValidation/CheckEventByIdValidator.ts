@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 import Event from '../../model/Event'
 import ValidationError from '../../errors/ValidationError'
 
-export default async function GetEventByIdValidator(payload: string) {
+export default async function CheckEventByIdValidator(payload: string) {
   if (!mongoose.Types.ObjectId.isValid(payload)) {
     const invalidIdError: ValidationError = {
       resource: 'id',
