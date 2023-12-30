@@ -1,9 +1,10 @@
-import CustomError from './CustomError';
+import CustomError from './CustomError'
 
 class UnauthorizedError extends CustomError {
   constructor(message: string = 'Unauthorized') {
-    super(401, 'Unauthorized', message);
+    super('UnauthorizedError', [{ resource: 'authorization', message }])
+    this.statusCode = 401
   }
 }
 
-export default UnauthorizedError;
+export default UnauthorizedError

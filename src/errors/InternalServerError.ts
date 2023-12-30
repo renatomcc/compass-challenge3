@@ -1,9 +1,10 @@
-import CustomError from './CustomError';
+import CustomError from './CustomError'
 
 class InternalServerError extends CustomError {
   constructor(message: string = 'Internal Server Error') {
-    super(500, 'Internal Server Error', message);
+    super('InternalServerError', [{ resource: 'server', message }])
+    this.statusCode = 500
   }
 }
 
-export default InternalServerError;
+export default InternalServerError
