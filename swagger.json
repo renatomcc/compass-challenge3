@@ -1,803 +1,327 @@
 {
-  "swagger": "2.0",
+  "openapi": "3.0.0",
   "info": {
-    "title": "Challenge 3 - Node & AWS",
-    "description": "REST API for managing events",
-    "termsOfService": "",
-    "contact": {
-      "email": "renato.castro.pb@compasso.com.br"
-    },
-    "version": "1.0.0"
+    "title": "Your API Title",
+    "version": "1.0.0",
+    "description": "Your API Description"
   },
-  "basePath": "/api",
-  "schemes": ["http", "https"],
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Local server"
+    }
+  ],
   "paths": {
-    "/users/sign-up": {
+    "/api/v1/users/sign-up": {
       "post": {
-        "summary": "Add a new user",
+        "summary": "Create a new user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SignUpUser"
+              },
+              "example": {
+                "firstName": "Shakira",
+                "lastName": "Isabel",
+                "birthDate": "1977-02-02",
+                "city": "Barranquilla",
+                "country": "Colômbia",
+                "email": "shakira@wakawaka.com",
+                "password": "hipsdontlie",
+                "confirmPassword": "hipsdontlie"
+              }
+            }
+          }
+        },
         "responses": {
-          "201": {
-            "description": "User created"
+          "200": {
+            "description": "User created successfully"
           },
           "400": {
             "description": "Invalid input",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string"
-                },
-                "errors": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "resource": {
-                        "type": "string"
-                      },
-                      "message": {
-                        "type": "string"
-                      }
+            "content": {
+              "application/json": {
+                "example": {
+                  "type": "Validation Error",
+                  "errors": [
+                    {
+                      "resource": "email",
+                      "message": "invalid email"
                     }
-                  }
+                  ]
                 }
               }
             }
           },
           "500": {
             "description": "Server error",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "statusCode": {
-                  "type": "integer"
-                },
-                "error": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
+            "content": {
+              "application/json": {
+                "example": {
+                  "statusCode": 500,
+                  "error": "Internal Server Error",
+                  "message": "Something went wrong"
                 }
-              }
-            }
-          }
-        },
-        "parameters": [],
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
-        "requestBody": {
-          "description": "User that needs to be added",
-          "content": {
-            "application/json": {
-              "example": {
-                "firstName": "string",
-                "lastName": "string",
-                "birthDate": "2023-12-30",
-                "city": "string",
-                "country": "string",
-                "email": "string",
-                "password": "string",
-                "confirmPassword": "string"
               }
             }
           }
         }
       }
     },
-    "/users/sign-in": {
+    "/api/v1/users/sign-in": {
       "post": {
         "summary": "Login of an existing user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SignInUser"
+              },
+              "example": {
+                "email": "shakira@wakawaka.com",
+                "password": "hipsdontlie"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "User logged in successfully",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "firstName": {
-                  "type": "string"
-                },
-                "lastName": {
-                  "type": "string"
-                },
-                "email": {
-                  "type": "string"
+            "content": {
+              "application/json": {
+                "example": {
+                  "firstName": "John",
+                  "lastName": "Doe",
+                  "email": "john@example.com"
                 }
               }
             }
           },
           "400": {
             "description": "Bad credentials",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string"
-                },
-                "errors": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "resource": {
-                        "type": "string"
-                      },
-                      "message": {
-                        "type": "string"
-                      }
+            "content": {
+              "application/json": {
+                "example": {
+                  "type": "Validation Error",
+                  "errors": [
+                    {
+                      "resource": "email",
+                      "message": "invalid email"
                     }
-                  }
+                  ]
                 }
               }
             }
           },
           "500": {
             "description": "Server error",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "statusCode": {
-                  "type": "integer"
-                },
-                "error": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
+            "content": {
+              "application/json": {
+                "example": {
+                  "statusCode": 500,
+                  "error": "Internal Server Error",
+                  "message": "Something went wrong"
                 }
-              }
-            }
-          }
-        },
-        "parameters": [],
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
-        "requestBody": {
-          "description": "User that needs to be added",
-          "content": {
-            "application/json": {
-              "example": {
-                "email": "string",
-                "password": "string"
               }
             }
           }
         }
       }
     },
-    "/events": {
-      "get": {
-        "summary": "Get all events",
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "_id": {
-                    "type": "string"
-                  },
-                  "description": {
-                    "type": "string"
-                  },
-                  "dayOfWeek": {
-                    "type": "string"
-                  },
-                  "userId": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid data supplied",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string"
-                },
-                "errors": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "resource": {
-                        "type": "string"
-                      },
-                      "message": {
-                        "type": "string"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "statusCode": {
-                  "type": "integer"
-                },
-                "error": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "statusCode": {
-                  "type": "integer"
-                },
-                "error": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Server error",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "statusCode": {
-                  "type": "integer"
-                },
-                "error": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
-                }
+    "/api/v1/events": {
+      "post": {
+        "summary": "Create a new event",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Event"
               }
             }
           }
         },
+        "responses": {
+          "200": {
+            "description": "Event created successfully"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get all events by day",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "parameters": [
           {
             "name": "dayOfWeek",
             "in": "query",
-            "description": "Available values: sunday, monday, tuesday, wednesday, thursday, friday, saturday",
-            "required": false,
-            "type": "string"
+            "description": "Day of the week",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "sunday",
+                "monday",
+                "tuesday",
+                "wednesday",
+                "thursday",
+                "friday",
+                "saturday"
+              ]
+            }
           }
         ],
-        "consumes": ["application/json"],
-        "produces": ["application/json"]
-      },
-      "post": {
-        "summary": "Create a new event",
         "responses": {
           "200": {
-            "description": "Successful operation",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "_id": {
-                  "type": "string"
-                },
-                "description": {
-                  "type": "string"
-                },
-                "dayOfWeek": {
-                  "type": "string"
-                },
-                "userId": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid input",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string"
-                },
-                "errors": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "resource": {
-                        "type": "string"
-                      },
-                      "message": {
-                        "type": "string"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "statusCode": {
-                  "type": "integer"
-                },
-                "error": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Server error",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "statusCode": {
-                  "type": "integer"
-                },
-                "error": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [],
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
-        "requestBody": {
-          "description": "Event that needs to be added",
-          "content": {
-            "application/json": {
-              "example": {
-                "description": "string",
-                "dayOfWeek": "sunday"
-              }
-            }
+            "description": "List of events"
           }
         }
-      }
-    },
-    "/events/{id}": {
-      "get": {
-        "summary": "Get an event from a specific id",
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "_id": {
-                  "type": "string"
-                },
-                "description": {
-                  "type": "string"
-                },
-                "dayOfWeek": {
-                  "type": "string"
-                },
-                "userId": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "statusCode": {
-                  "type": "integer"
-                },
-                "error": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Content not found",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "statusCode": {
-                  "type": "integer"
-                },
-                "error": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Server error",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "statusCode": {
-                  "type": "integer"
-                },
-                "error": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "consumes": ["application/json"],
-        "produces": ["application/json"]
       },
       "delete": {
-        "summary": "Deletes an event from a specific id",
-        "responses": {
-          "204": {
-            "description": "Event deleted"
-          },
-          "400": {
-            "description": "Invalid ID supplied",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "statusCode": {
-                  "type": "integer"
-                },
-                "error": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "statusCode": {
-                  "type": "integer"
-                },
-                "error": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Event not found",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "statusCode": {
-                  "type": "integer"
-                },
-                "error": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Server error",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "statusCode": {
-                  "type": "integer"
-                },
-                "error": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
+        "summary": "Delete events by day",
+        "security": [
           {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "string"
+            "BearerAuth": []
           }
         ],
-        "consumes": ["application/json"],
-        "produces": []
-      }
-    },
-    "/events/{dayOfWeek}": {
-      "delete": {
-        "summary": "Deletes events from a specific Day of Week",
-        "responses": {
-          "200": {
-            "description": "List of deleteDailyEvents",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "deletedEvents": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "_id": {
-                        "type": "string"
-                      },
-                      "description": {
-                        "type": "string"
-                      },
-                      "dayOfWeek": {
-                        "type": "string"
-                      },
-                      "userId": {
-                        "type": "string"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid data supplied",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "statusCode": {
-                  "type": "integer"
-                },
-                "error": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "statusCode": {
-                  "type": "integer"
-                },
-                "error": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Event not found",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "statusCode": { "type": "integer" },
-                "error": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Server error",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "statusCode": {
-                  "type": "integer"
-                },
-                "error": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        },
         "parameters": [
           {
             "name": "dayOfWeek",
-            "in": "path",
-            "description": "dayOfWeek",
+            "in": "query",
+            "description": "Day of the week",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string",
+              "enum": [
+                "sunday",
+                "monday",
+                "tuesday",
+                "wednesday",
+                "thursday",
+                "friday",
+                "saturday"
+              ]
+            }
           }
         ],
-        "consumes": ["application/json"],
-        "produces": []
+        "responses": {
+          "200": {
+            "description": "Events deleted successfully"
+          }
+        }
+      }
+    },
+    "/api/v1/events/{id}": {
+      "get": {
+        "summary": "Get event by ID",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Event ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Event details"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete event by ID",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Event ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Event deleted successfully"
+          }
+        }
       }
     }
   },
-  "definitions": {
-    "User": {
-      "type": "object",
-      "properties": {
-        "firstName": {
-          "type": "string"
-        },
-        "lastName": {
-          "type": "string"
-        },
-        "birthDate": {
-          "type": "string"
-        },
-        "city": {
-          "type": "string"
-        },
-        "country": {
-          "type": "string"
-        },
-        "email": {
-          "type": "string"
-        },
-        "password": {
-          "type": "string"
-        },
-        "confirmPassword": {
-          "type": "string"
-        }
-      }
-    },
-    "UserLogin": {
-      "type": "object",
-      "properties": {
-        "email": {
-          "type": "string"
-        },
-        "password": {
-          "type": "string"
-        }
-      }
-    },
-    "Event": {
-      "type": "object",
-      "properties": {
-        "_id": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "dayOfWeek": {
-          "type": "string"
-        },
-        "userId": {
-          "type": "string"
-        }
-      }
-    },
-    "EventInput": {
-      "type": "object",
-      "properties": {
-        "description": {
-          "type": "string"
-        },
-        "dayOfWeek": {
-          "type": "string"
-        }
-      }
-    },
-    "ValidationError": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string"
-        },
-        "errors": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "resource": {
-                "type": "string"
-              },
-              "message": {
-                "type": "string"
-              }
-            }
+  "components": {
+    "schemas": {
+      "SignUpUser": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "city": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "confirmPassword": {
+            "type": "string"
           }
         }
-      }
-    },
-    "Unauthorized": {
-      "type": "object",
-      "properties": {
-        "statusCode": {
-          "type": "integer"
-        },
-        "error": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
+      },
+      "SignInUser": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
         }
-      }
-    },
-    "NotFound": {
-      "type": "object",
-      "properties": {
-        "statusCode": {
-          "type": "integer"
-        },
-        "error": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        }
-      }
-    },
-    "ServerError": {
-      "type": "object",
-      "properties": {
-        "statusCode": {
-          "type": "integer"
-        },
-        "error": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
+      },
+      "Event": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "dayOfWeek": {
+            "type": "string"
+          }
         }
       }
     }
