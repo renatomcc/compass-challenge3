@@ -33,7 +33,6 @@ export default class EventsServices {
 
     return formattedResult
   }
-
   static async getAllEventsByDay(payload: string, token: string) {
     const validationResponse = CheckEventsByDayValidator(payload)
     const decodedToken = jwt.verify(token, process.env.SECRET!) as JwtPayload
