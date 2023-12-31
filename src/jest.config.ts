@@ -1,10 +1,10 @@
-module.exports = {
+// jest.config.ts
+export default {
   preset: 'ts-jest',
   testEnvironment: 'node',
-  testMatch: ['**/*.spec.ts'],
-  globals: {
-    'ts-jest': {
-      tsconfig: 'tsconfig.json',
-    },
+  testMatch: ['**/__tests__/**/*.ts?(x)'],
+  transform: {
+    '^.+\\.tsx?$': 'babel-jest',
   },
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
 }
