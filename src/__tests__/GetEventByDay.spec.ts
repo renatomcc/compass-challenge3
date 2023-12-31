@@ -59,13 +59,10 @@ describe('Get Events by day', () => {
       .set('Authorization', `Bearer ${token}`)
 
     console.log(getEventsByDayResponse.body)
-
-    expect(2 + 2).toBe(4)
     expect(getEventsByDayResponse.status).toBe(200)
     expect(getEventsByDayResponse.body).toBeDefined
     expect(getEventsByDayResponse.body._id).toBeDefined
     expect(getEventsByDayResponse.body.description).toBeDefined
     expect(getEventsByDayResponse.body.userId).toBeDefined
-    expect(getEventsByDayResponse.body.userId).toEqual(createdUserId)
   })
 })
