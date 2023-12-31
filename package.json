@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon src/app.ts"
+    "start": "nodemon src/app.ts",
+    "build": "tsc",
+    "lint": "eslint . --fix",
+    "test": "jest dist/__tests__ --testEnvironment=node --detectOpenHandles --runInBand",
+    "format": "prettier --write ."
   },
   "keywords": [],
   "author": "",
@@ -17,6 +21,7 @@
     "@types/jsonwebtoken": "^9.0.5",
     "@types/mongoose": "^5.11.97",
     "@types/node": "^20.10.5",
+    "@types/supertest": "^6.0.2",
     "@typescript-eslint/eslint-plugin": "^6.16.0",
     "@typescript-eslint/parser": "^6.16.0",
     "bcrypt": "^5.1.1",
@@ -31,6 +36,7 @@
     "mongoose": "^8.0.3",
     "nodemon": "^3.0.2",
     "prettier": "^3.1.1",
+    "superset": "^2.0.1",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0",
     "ts-jest": "^29.1.1",
