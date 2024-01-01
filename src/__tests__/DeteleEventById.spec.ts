@@ -76,14 +76,19 @@ describe('Delete Event by id', () => {
     expect(deleteEventResponse.body.userId).toBeDefined
   })
 
-  it('should handle invalid id supplied', async () => {
+  it('should handle invalid id format supplied', async () => {
     const deleteEventResponse = await request(app)
       .delete(`/api/v1/events/invalidId`)
       .set('Authorization', `Bearer ${token}`)
 
-    console.log(deleteEventResponse.body)
-
     expect(deleteEventResponse.status).toBe(400)
     expect(deleteEventResponse.body).toBeDefined
+    expect(deleteEventResponse.body.type).toBeDefined
+    expect(deleteEventResponse.body.errors).toBeDefined
+    expect(deleteEventResponse.body.type).toEqual('Validation error')
+    expect(deleteEventResponse.body.errors[0].resource).toEqual('id')
+    expect(deleteEventResponse.body.errors[0].message).toEqual(
+      'Invalid ObjectId',
+    )
   })
 })
