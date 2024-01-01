@@ -43,7 +43,7 @@ export default class EventsController {
       const dayOfWeek: string = String(req.query.dayOfWeek)
       const token: string = String(req.headers.authorization?.split(' ')[1])
       const events = await EventsServices.deleteEventsByDay(dayOfWeek, token)
-      return res.status(200).json({ deletedEvents: events })
+      return res.status(204).json({ deletedEvents: events })
     } catch (err) {
       if (err instanceof CustomError) {
         return res
