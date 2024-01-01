@@ -3,21 +3,15 @@ import app from '../app'
 import mongoose from 'mongoose'
 import User from '../model/User'
 import Event from '../model/Event'
+import IEvent from '../interfaces/Event'
 
 describe('Get Event by id', () => {
   let createdUserId: string
   let createdEventId: string
+  let token: string
+  let eventData: IEvent
 
-  afterAll(async () => {
-    if (createdUserId) {
-      await User.findByIdAndDelete(createdUserId)
-    }
-    if (createdEventId) {
-      await Event.findByIdAndDelete(createdEventId)
-    }
-  })
-
-  it('should return a specific day of informed id', async () => {
+  beforeAll(async () => {
     const userData = {
       firstName: 'Shakira',
       lastName: 'Isabel',
@@ -46,9 +40,9 @@ describe('Get Event by id', () => {
       .send(userLogin)
       .set('Accept', 'application/json')
 
-    const token = signInResponse.body.token
+    token = signInResponse.body.token
 
-    const eventData = {
+    eventData = {
       description: 'Show',
       dayOfWeek: 'sunday',
     }
@@ -59,7 +53,18 @@ describe('Get Event by id', () => {
       .set('Authorization', `Bearer ${token}`)
 
     createdEventId = createdEventResponse.body._id
+  })
 
+  afterAll(async () => {
+    if (createdUserId) {
+      await User.findByIdAndDelete(createdUserId)
+    }
+    if (createdEventId) {
+      await Event.findByIdAndDelete(createdEventId)
+    }
+  })
+
+  it('should return a specific day of informed id', async () => {
     const getEventResponse = await request(app)
       .get(`/api/v1/events/${createdEventId}`)
       .set('Authorization', `Bearer ${token}`)
