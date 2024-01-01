@@ -10,10 +10,19 @@ export const authenticationMiddleware = async (
 ) => {
   const authHeader = req.headers.authorization
 
-  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+  if (!authHeader) {
     const error = new CustomError(
       'AuthenticationError',
       [{ resource: 'token', message: 'No token provided.' }],
+      StatusCodes.UNAUTHORIZED,
+    )
+    return res.status(StatusCodes.UNAUTHORIZED).json(error)
+  }
+
+  if (!authHeader.startsWith('Bearer ')) {
+    const error = new CustomError(
+      'AuthenticationError',
+      [{ resource: 'token', message: 'Invalid token format.' }],
       StatusCodes.UNAUTHORIZED,
     )
     return res.status(StatusCodes.UNAUTHORIZED).json(error)
