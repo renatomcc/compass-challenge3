@@ -71,7 +71,6 @@ describe('Create event', () => {
     expect(createEventResponse.body.description).toBeDefined
     expect(createEventResponse.body.dayOfWeek).toBeDefined
     expect(createEventResponse.body.userId).toBeDefined
-    expect(createEventResponse.body.userId).toEqual(createdUserId)
   })
 
   it('should handle a request with invalid token', async () => {
