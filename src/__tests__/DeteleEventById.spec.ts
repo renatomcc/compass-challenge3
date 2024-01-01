@@ -59,7 +59,8 @@ describe('Delete Event by id', () => {
 
   it('should delete a specific day of informed id', async () => {
     const createdEventResponse = await request(app)
-      .delete('/api/v1/events')
+      .post('/api/v1/events')
+      .send(eventData)
       .set('Authorization', `Bearer ${token}`)
 
     createdEventId = createdEventResponse.body._id
@@ -67,7 +68,7 @@ describe('Delete Event by id', () => {
     const deleteEventResponse = await request(app)
       .delete(`/api/v1/events/${createdEventId}`)
       .set('Authorization', `Bearer ${token}`)
-
+      
     expect(deleteEventResponse.status).toBe(204)
     expect(deleteEventResponse.body).toBeDefined
     expect(deleteEventResponse.body.description).toBeDefined
@@ -90,5 +91,45 @@ describe('Delete Event by id', () => {
     expect(deleteEventResponse.body.errors[0].message).toEqual(
       'Invalid ObjectId',
     )
+  })
+
+  it('should handle a request with no token', async () => {
+    const deleteEventResponse = await request(app)
+      .delete(`/api/v1/events/${createdEventId}`)
+      .set('Authorization', ``)
+
+    expect(deleteEventResponse.status).toBe(401)
+    expect(deleteEventResponse.body).toBeDefined
+    expect(deleteEventResponse.body.type).toEqual('AuthenticationError')
+    expect(deleteEventResponse.body.errors[0].resource).toEqual('token')
+    expect(deleteEventResponse.body.errors[0].message).toEqual(
+      'No token provided.',
+    )
+  })
+
+  it('should handle a request with invalid token format', async () => {
+    const deleteEventResponse = await request(app)
+      .delete(`/api/v1/events/${createdEventId}`)
+      .set('Authorization', `invalidToken`)
+
+    expect(deleteEventResponse.status).toBe(401)
+    expect(deleteEventResponse.body).toBeDefined
+    expect(deleteEventResponse.body.type).toEqual('AuthenticationError')
+    expect(deleteEventResponse.body.errors[0].resource).toEqual('token')
+    expect(deleteEventResponse.body.errors[0].message).toEqual(
+      'Invalid token format.',
+    )
+  })
+
+  it('should handle a request with invalid token', async () => {
+    const deleteEventResponse = await request(app)
+      .delete(`/api/v1/events/${createdEventId}`)
+      .set('Authorization', `Bearer a3sd541a96s84fa2s61`)
+
+    expect(deleteEventResponse.status).toBe(401)
+    expect(deleteEventResponse.body).toBeDefined
+    expect(deleteEventResponse.body.type).toEqual('AuthenticationError')
+    expect(deleteEventResponse.body.errors[0].resource).toEqual('token')
+    expect(deleteEventResponse.body.errors[0].message).toEqual('Invalid token.')
   })
 })
