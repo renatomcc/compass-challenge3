@@ -79,10 +79,9 @@ describe('Delete Events by day', () => {
       .set('Authorization', `Bearer ${token}`)
 
     console.log(deleteEventsResponse.body)
-    expect(deleteEventsResponse.status).toBe(200)
-    // expect(deleteEventsResponse.body).toBeDefined
-    // expect(deleteEventsResponse.body._id).toBeDefined
-    // expect(deleteEventsResponse.body.description).toBeDefined
-    // expect(deleteEventsResponse.body.userId).toBeDefined
+    expect(deleteEventsResponse.status).toBe(204)
+    expect(deleteEventsResponse.body).toBeDefined
+    expect(deleteEventsResponse.body.deletedEvents).toBeDefined
+    expect(deleteEventsResponse.body.deletedEvents.lenght).toEqual(3)
   })
 })
