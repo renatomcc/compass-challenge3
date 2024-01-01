@@ -3,21 +3,15 @@ import app from '../app'
 import mongoose from 'mongoose'
 import User from '../model/User'
 import Event from '../model/Event'
+import IEvent from '../interfaces/Event'
 
 describe('Delete Event by id', () => {
   let createdUserId: string
   let createdEventId: string
-  afterAll(async () => {
-    if (createdUserId) {
-      await User.findByIdAndDelete(createdUserId)
-    }
-
-    if (createdEventId) {
-      await Event.findByIdAndDelete(createdEventId)
-    }
-  })
-
-  it('should delete a specific day of informed id', async () => {
+  let token: string
+  let eventData: IEvent
+  
+  beforeAll(async () => {
     const userData = {
       firstName: 'Shakira',
       lastName: 'Isabel',
@@ -46,13 +40,24 @@ describe('Delete Event by id', () => {
       .send(userLogin)
       .set('Accept', 'application/json')
 
-    const token = signInResponse.body.token
+    token = signInResponse.body.token
 
-    const eventData = {
+    eventData = {
       description: 'Show',
       dayOfWeek: 'sunday',
     }
+  })
+  afterAll(async () => {
+    if (createdUserId) {
+      await User.findByIdAndDelete(createdUserId)
+    }
 
+    if (createdEventId) {
+      await Event.findByIdAndDelete(createdEventId)
+    }
+  })
+
+  it('should delete a specific day of informed id', async () => {
     const createdEventResponse = await request(app)
       .post('/api/v1/events')
       .send(eventData)
