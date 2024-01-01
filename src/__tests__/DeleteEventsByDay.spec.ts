@@ -78,10 +78,9 @@ describe('Delete Events by day', () => {
       .delete(`/api/v1/events?dayOfWeek=${dayOfWeek}`)
       .set('Authorization', `Bearer ${token}`)
 
-    console.log(deleteEventsResponse.body)
-    expect(deleteEventsResponse.status).toBe(204)
+    expect(deleteEventsResponse.status).toBe(200)
     expect(deleteEventsResponse.body).toBeDefined
     expect(deleteEventsResponse.body.deletedEvents).toBeDefined
-    expect(deleteEventsResponse.body.deletedEvents.lenght).toEqual(3)
+    expect(deleteEventsResponse.body.deletedEvents.length).toEqual(3)
   })
 })
