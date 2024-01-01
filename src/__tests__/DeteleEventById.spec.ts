@@ -59,12 +59,16 @@ describe('Delete Event by id', () => {
       .set('Authorization', `Bearer ${token}`)
 
     createdEventId = createdEventResponse.body._id
-    console.log(createdEventId)
+
     const deleteEventResponse = await request(app)
       .delete(`/api/v1/events/${createdEventId}`)
       .set('Authorization', `Bearer ${token}`)
 
     expect(deleteEventResponse.status).toBe(204)
     expect(deleteEventResponse.body).toBeDefined
+    expect(deleteEventResponse.body.description).toBeDefined
+    expect(deleteEventResponse.body.dayOfWeek).toBeDefined
+    expect(deleteEventResponse.body._id).toBeDefined
+    expect(deleteEventResponse.body.userId).toBeDefined
   })
 })

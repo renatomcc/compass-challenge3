@@ -27,7 +27,6 @@ export default class EventsRepository {
   static async deleteEventById(eventId: string, userId: string) {
     const eventToDelete = await Event.findById(eventId)
     await Event.deleteMany({ eventId, userId })
-    console.log(eventToDelete)
     return eventToDelete
   }
 }
