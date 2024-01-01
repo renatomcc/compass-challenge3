@@ -74,20 +74,37 @@ describe('Create event', () => {
     expect(createEventResponse.body.userId).toEqual(createdUserId)
   })
 
-  it('should handle a request with no token', async () => {
+  it('should handle a request with invalid token', async () => {
     const createEventResponse = await request(app)
       .post('/api/v1/events')
       .send(eventData)
-      .set('Authorization', ``)
+      .set('Authorization', `invalidToken`)
 
-    createdEventId = createEventResponse.body._id
-    console.log(createEventResponse.body.errors)
     expect(createEventResponse.status).toBe(401)
     expect(createEventResponse.body).toBeDefined
     expect(createEventResponse.body.type).toEqual('AuthenticationError')
     expect(createEventResponse.body.errors[0].resource).toEqual('token')
     expect(createEventResponse.body.errors[0].message).toEqual(
       'No token provided.',
+    )
+  })
+
+  it('should handle a request invalid data', async () => {
+    const invalidData: IEvent = {
+      description: 'invalid event',
+      dayOfWeek: 'invalidDayOfWeek',
+    }
+    const createEventResponse = await request(app)
+      .post('/api/v1/events')
+      .send(invalidData)
+      .set('Authorization', `Bearer ${token}`)
+
+    expect(createEventResponse.status).toBe(400)
+    expect(createEventResponse.body).toBeDefined
+    expect(createEventResponse.body.type).toEqual('Validation error')
+    expect(createEventResponse.body.errors[0].resource).toEqual('dayOfWeek')
+    expect(createEventResponse.body.errors[0].message).toEqual(
+      'dayOfWeek must be a valid day of the week',
     )
   })
 })
