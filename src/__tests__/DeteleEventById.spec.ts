@@ -10,7 +10,7 @@ describe('Delete Event by id', () => {
   let createdEventId: string
   let token: string
   let eventData: IEvent
-  
+
   beforeAll(async () => {
     const userData = {
       firstName: 'Shakira',
@@ -59,8 +59,7 @@ describe('Delete Event by id', () => {
 
   it('should delete a specific day of informed id', async () => {
     const createdEventResponse = await request(app)
-      .post('/api/v1/events')
-      .send(eventData)
+      .delete('/api/v1/events')
       .set('Authorization', `Bearer ${token}`)
 
     createdEventId = createdEventResponse.body._id
@@ -75,5 +74,16 @@ describe('Delete Event by id', () => {
     expect(deleteEventResponse.body.dayOfWeek).toBeDefined
     expect(deleteEventResponse.body._id).toBeDefined
     expect(deleteEventResponse.body.userId).toBeDefined
+  })
+
+  it('should handle invalid id supplied', async () => {
+    const deleteEventResponse = await request(app)
+      .delete(`/api/v1/events/invalidId`)
+      .set('Authorization', `Bearer ${token}`)
+
+    console.log(deleteEventResponse.body)
+
+    expect(deleteEventResponse.status).toBe(400)
+    expect(deleteEventResponse.body).toBeDefined
   })
 })
