@@ -15,16 +15,16 @@ export default function CreateEventValidator(payload: IEvent) {
 
   const schema = Joi.object<IEvent>({
     description: Joi.string().required().messages({
-      'string.base': '{{#label}} must be a string',
-      'any.required': '{{#label}} is required',
+      'string.base': 'description must be a string',
+      'any.required': 'description is required',
     }),
     dayOfWeek: Joi.string()
       .valid(...validDaysOfWeek.map((day) => day.toLowerCase()))
       .required()
       .messages({
-        'string.base': '{{#label}} must be a string',
-        'any.only': '{{#label}} must be a valid day of the week',
-        'any.required': '{{#label}} is required',
+        'string.base': 'dayOfWeek must be a string',
+        'any.only': 'dayOfWeek must be a valid day of the week',
+        'any.required': 'dayOfWeek is required',
       }),
   }).options({
     abortEarly: false,
