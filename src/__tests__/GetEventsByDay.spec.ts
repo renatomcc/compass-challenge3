@@ -64,7 +64,6 @@ describe('Get Events by day', () => {
       .get(`/api/v1/events?dayOfWeek=${dayOfWeek}`)
       .set('Authorization', `Bearer ${token}`)
 
-    console.log(getEventsByDayResponse.body)
     expect(getEventsByDayResponse.status).toBe(200)
     expect(getEventsByDayResponse.body).toBeDefined
     expect(getEventsByDayResponse.body._id).toBeDefined

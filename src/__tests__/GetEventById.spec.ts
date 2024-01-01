@@ -64,9 +64,6 @@ describe('Get Event by id', () => {
       .get(`/api/v1/events/${createdEventId}`)
       .set('Authorization', `Bearer ${token}`)
 
-    console.log(createdUserId)
-    console.log(getEventResponse.body)
-
     expect(getEventResponse.status).toBe(200)
     expect(getEventResponse.body).toBeDefined
     expect(getEventResponse.body.description).toBeDefined

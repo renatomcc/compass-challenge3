@@ -39,7 +39,7 @@ describe('Sign In', () => {
       .post('/api/v1/users/sign-in')
       .send(userLogin)
       .set('Accept', 'application/json')
-    console.log(signInResponse.body)
+
     expect(signInResponse.status).toBe(200)
     expect(signInResponse.body).toBeDefined()
     expect(signInResponse.body.firstName).toBeDefined()
