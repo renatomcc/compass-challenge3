@@ -130,4 +130,18 @@ describe('Delete Events by day', () => {
       'Invalid token format.',
     )
   })
+
+  it('should handle a request with invalid token', async () => {
+    const deleteEventsResponse = await request(app)
+      .delete(`/api/v1/events?dayOfWeek=sunday`)
+      .set('Authorization', `Bearer a3sd541a96s84fa2s61`)
+      
+    expect(deleteEventsResponse.status).toBe(401)
+    expect(deleteEventsResponse.body).toBeDefined
+    expect(deleteEventsResponse.body.type).toEqual('AuthenticationError')
+    expect(deleteEventsResponse.body.errors[0].resource).toEqual('token')
+    expect(deleteEventsResponse.body.errors[0].message).toEqual(
+      'Invalid token.',
+    )
+  })
 })
