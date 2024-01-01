@@ -88,26 +88,18 @@ describe('Delete Events by day', () => {
   })
 
   it('should handle invalid data supplied', async () => {
-    const eventData = {
-      description: 'Show',
-      dayOfWeek: 'sunday',
-    }
-
-    await request(app)
-      .post('/api/v1/events')
-      .send(eventData)
-      .set('Authorization', `Bearer ${token}`)
-
     const dayOfWeek: string = 'invalidDay'
 
     const deleteEventsResponse = await request(app)
       .delete(`/api/v1/events?dayOfWeek=${dayOfWeek}`)
       .set('Authorization', `Bearer ${token}`)
-    console.log(deleteEventsResponse.body)
+      
     expect(deleteEventsResponse.status).toBe(400)
     expect(deleteEventsResponse.body).toBeDefined
     expect(deleteEventsResponse.body.type).toEqual('Validation error')
     expect(deleteEventsResponse.body.errors[0].resource).toEqual('dayOfWeek')
-    expect(deleteEventsResponse.body.errors[0].message).toEqual('dayOfWeek must be a valid day of the week')
+    expect(deleteEventsResponse.body.errors[0].message).toEqual(
+      'dayOfWeek must be a valid day of the week',
+    )
   })
 })
