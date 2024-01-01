@@ -17,7 +17,7 @@ export default function CheckEventsByDayValidator(dayOfWeek: string) {
     .required()
     .messages({
       'string.base': '{{#label}} must be a string',
-      'any.only': '{{#label}} must be a valid day of the week',
+      'any.only': 'dayOfWeek must be a valid day of the week',
       'any.required': '{{#label}} is required',
     })
 
@@ -31,7 +31,7 @@ export default function CheckEventsByDayValidator(dayOfWeek: string) {
       }),
     )
 
-    return { type: 'Validation error', errors, statusCode: 422 }
+    return { type: 'Validation error', errors, statusCode: 400 }
   }
 
   return { statusCode: 200 }
