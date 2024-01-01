@@ -43,7 +43,7 @@ export default function CreateEventValidator(payload: IEvent) {
       }),
     )
 
-    return { type: 'Validation error', errors, statusCode: 422 }
+    return { type: 'Validation error', errors, statusCode: 400 }
   }
 
   return { statusCode: 200 }
