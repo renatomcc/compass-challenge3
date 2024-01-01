@@ -1,4 +1,4 @@
 export default interface IEvent {
-  description: 'string'
-  dayOfWeek: 'string'
+  description: string
+  dayOfWeek: string
 }

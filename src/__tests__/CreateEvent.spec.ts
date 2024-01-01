@@ -3,20 +3,15 @@ import app from '../app'
 import mongoose from 'mongoose'
 import User from '../model/User'
 import Event from '../model/Event'
+import IEvent from '../interfaces/Event'
 
 describe('Create event', () => {
   let createdUserId: string
   let createdEventId: string
+  let eventData: IEvent
+  let token: string
 
-  afterAll(async () => {
-    if (createdUserId) {
-      await User.findByIdAndDelete(createdUserId)
-    }
-    if (createdEventId) {
-      await Event.findByIdAndDelete(createdEventId)
-    }
-  })
-  it('should create a new event', async () => {
+  beforeAll(async () => {
     const userData = {
       firstName: 'Shakira',
       lastName: 'Isabel',
@@ -45,13 +40,24 @@ describe('Create event', () => {
       .send(userLogin)
       .set('Accept', 'application/json')
 
-    const token = signInResponse.body.token
+    token = signInResponse.body.token
 
-    const eventData = {
+    eventData = {
       description: 'Show',
       dayOfWeek: 'sunday',
     }
+  })
 
+  afterAll(async () => {
+    if (createdUserId) {
+      await User.findByIdAndDelete(createdUserId)
+    }
+    if (createdEventId) {
+      await Event.findByIdAndDelete(createdEventId)
+    }
+  })
+
+  it('should create a new event', async () => {
     const createEventResponse = await request(app)
       .post('/api/v1/events')
       .send(eventData)
@@ -66,5 +72,22 @@ describe('Create event', () => {
     expect(createEventResponse.body.dayOfWeek).toBeDefined
     expect(createEventResponse.body.userId).toBeDefined
     expect(createEventResponse.body.userId).toEqual(createdUserId)
+  })
+
+  it('should handle a request with no token', async () => {
+    const createEventResponse = await request(app)
+      .post('/api/v1/events')
+      .send(eventData)
+      .set('Authorization', ``)
+
+    createdEventId = createEventResponse.body._id
+    console.log(createEventResponse.body.errors)
+    expect(createEventResponse.status).toBe(401)
+    expect(createEventResponse.body).toBeDefined
+    expect(createEventResponse.body.type).toEqual('AuthenticationError')
+    expect(createEventResponse.body.errors[0].resource).toEqual('token')
+    expect(createEventResponse.body.errors[0].message).toEqual(
+      'No token provided.',
+    )
   })
 })
