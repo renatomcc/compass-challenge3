@@ -89,6 +89,8 @@ export default class EventsServices {
   }
   static async deleteEventById(payload: string, token: string) {
     const validationResponse = await CheckEventByIdValidator(payload)
+    const decodedToken = jwt.verify(token, process.env.SECRET!) as JwtPayload
+    const userId = decodedToken.userId
     if (validationResponse.statusCode !== 200) {
       throw new CustomError(
         validationResponse.type || 'ValidationError',
@@ -96,6 +98,6 @@ export default class EventsServices {
         validationResponse.statusCode,
       )
     }
-    return await EventsRepository.deleteEventById(payload)
+    return await EventsRepository.deleteEventById(payload, userId)
   }
 }

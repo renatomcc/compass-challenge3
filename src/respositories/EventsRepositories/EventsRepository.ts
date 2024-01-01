@@ -24,9 +24,9 @@ export default class EventsRepository {
     const event = await Event.findById(eventId)
     return event
   }
-  static async deleteEventById(eventId: string) {
+  static async deleteEventById(eventId: string, userId: string) {
     const eventToDelete = await Event.findById(eventId)
-    await Event.findByIdAndDelete(eventId)
+    await Event.findByIdAndDelete({ eventId, userId })
     return eventToDelete
   }
 }
