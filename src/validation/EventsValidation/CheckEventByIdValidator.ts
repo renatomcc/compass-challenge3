@@ -11,7 +11,7 @@ export default async function CheckEventByIdValidator(payload: string) {
     return {
       type: 'Validation error',
       errors: [invalidIdError],
-      statusCode: 422,
+      statusCode: 400,
     }
   }
 
