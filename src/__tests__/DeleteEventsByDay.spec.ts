@@ -5,13 +5,9 @@ import User from '../model/User'
 
 describe('Delete Events by day', () => {
   let createdUserId: string
+  let token: string
 
-  afterAll(async () => {
-    if (createdUserId) {
-      await User.findByIdAndDelete(createdUserId)
-    }
-  })
-  it('should delete and return all events on a specific day of the week', async () => {
+  beforeAll(async () => {
     const userData = {
       firstName: 'Shakira',
       lastName: 'Isabel',
@@ -40,8 +36,15 @@ describe('Delete Events by day', () => {
       .send(userLogin)
       .set('Accept', 'application/json')
 
-    const token = signInResponse.body.token
+    token = signInResponse.body.token
+  })
 
+  afterAll(async () => {
+    if (createdUserId) {
+      await User.findByIdAndDelete(createdUserId)
+    }
+  })
+  it('should delete and return all events on a specific day of the week', async () => {
     const eventData = {
       description: 'Show',
       dayOfWeek: 'sunday',
