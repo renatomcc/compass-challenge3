@@ -2,13 +2,18 @@ import request from 'supertest'
 import app from '../app'
 import mongoose from 'mongoose'
 import User from '../model/User'
+import Event from '../model/Event'
 
 describe('Get Event by id', () => {
   let createdUserId: string
+  let createdEventId: string
 
   afterAll(async () => {
     if (createdUserId) {
       await User.findByIdAndDelete(createdUserId)
+    }
+    if (createdEventId) {
+      await Event.findByIdAndDelete(createdEventId)
     }
   })
 
@@ -53,10 +58,10 @@ describe('Get Event by id', () => {
       .send(eventData)
       .set('Authorization', `Bearer ${token}`)
 
-    const eventId: string = createdEventResponse.body._id
+    createdEventId = createdEventResponse.body._id
 
     const getEventResponse = await request(app)
-      .get(`/api/v1/events/${eventId}`)
+      .get(`/api/v1/events/${createdEventId}`)
       .set('Authorization', `Bearer ${token}`)
 
     console.log(createdUserId)
@@ -73,6 +78,6 @@ describe('Get Event by id', () => {
     }
 
     expect(getEventResponse.body._id).toBeDefined
-    expect(getEventResponse.body._id).toEqual(eventId)
+    expect(getEventResponse.body._id).toEqual(createdEventId)
   })
 })

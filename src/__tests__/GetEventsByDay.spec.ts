@@ -2,13 +2,18 @@ import request from 'supertest'
 import app from '../app'
 import mongoose from 'mongoose'
 import User from '../model/User'
+import Event from '../model/Event'
 
 describe('Get Events by day', () => {
   let createdUserId: string
+  let createdEventId: string
 
   afterAll(async () => {
     if (createdUserId) {
       await User.findByIdAndDelete(createdUserId)
+    }
+    if (createdEventId) {
+      await Event.findByIdAndDelete(createdEventId)
     }
   })
   it('should return all events on a specific day of the week', async () => {
@@ -47,11 +52,12 @@ describe('Get Events by day', () => {
       dayOfWeek: 'sunday',
     }
 
-    await request(app)
+    const createEventResponse = await request(app)
       .post('/api/v1/events')
       .send(eventData)
       .set('Authorization', `Bearer ${token}`)
 
+    createdEventId = createEventResponse.body._id
     const dayOfWeek: string = 'sunday'
 
     const getEventsByDayResponse = await request(app)

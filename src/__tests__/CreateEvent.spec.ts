@@ -2,13 +2,18 @@ import request from 'supertest'
 import app from '../app'
 import mongoose from 'mongoose'
 import User from '../model/User'
+import Event from '../model/Event'
 
 describe('Create event', () => {
   let createdUserId: string
+  let createdEventId: string
 
   afterAll(async () => {
     if (createdUserId) {
       await User.findByIdAndDelete(createdUserId)
+    }
+    if (createdEventId) {
+      await Event.findByIdAndDelete(createdEventId)
     }
   })
   it('should create a new event', async () => {
@@ -51,6 +56,9 @@ describe('Create event', () => {
       .post('/api/v1/events')
       .send(eventData)
       .set('Authorization', `Bearer ${token}`)
+
+    createdEventId = createEventResponse.body._id
+
     expect(createEventResponse.status).toBe(200)
     expect(createEventResponse.body).toBeDefined
     expect(createEventResponse.body._id).toBeDefined
