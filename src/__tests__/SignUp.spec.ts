@@ -6,7 +6,7 @@ import ISignUpUser from '../interfaces/SignUp'
 
 describe('Sign Up', () => {
   let createdUserId: string
-  let userData: ISignUpUser
+  let userData: any
 
   beforeAll(async () => {
     userData = {
@@ -18,7 +18,7 @@ describe('Sign Up', () => {
       email: 'shakira@wakawaka.com',
       password: 'hipsdontlie',
       confirmPassword: 'hipsdontlie',
-    } as ISignUpUser
+    }
   })
 
   afterAll(async () => {
@@ -56,6 +56,22 @@ describe('Sign Up', () => {
     expect(response.body.errors[0].resource).toEqual('firstName')
     expect(response.body.errors[0].message).toEqual(
       '"firstName" is not allowed to be empty',
+    )
+  })
+
+  it('should handle a request with invalid data', async () => {
+    userData.firstName = 1
+    const response = await request(app)
+      .post('/api/v1/users/sign-up')
+      .send(userData)
+      .set('Accept', 'application/json')
+    console.log(response.body)
+    expect(response.status).toBe(422)
+    expect(response.body).toBeDefined()
+    expect(response.body.type).toEqual('Validation error')
+    expect(response.body.errors[0].resource).toEqual('firstName')
+    expect(response.body.errors[0].message).toEqual(
+      '"firstName" must be a string',
     )
   })
 })
