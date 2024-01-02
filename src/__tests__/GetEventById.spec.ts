@@ -96,4 +96,44 @@ describe('Get Event by id', () => {
     expect(getEventResponse.body.errors[0].resource).toEqual('id')
     expect(getEventResponse.body.errors[0].message).toEqual('Invalid ObjectId')
   })
+
+  it('should handle a request with no token', async () => {
+    const getEventResponse = await request(app)
+      .get(`/api/v1/events/${createdEventId}`)
+      .set('Authorization', ``)
+
+    expect(getEventResponse.status).toBe(401)
+    expect(getEventResponse.body).toBeDefined
+    expect(getEventResponse.body.type).toEqual('AuthenticationError')
+    expect(getEventResponse.body.errors[0].resource).toEqual('token')
+    expect(getEventResponse.body.errors[0].message).toEqual(
+      'No token provided.',
+    )
+  })
+
+  it('should handle a request with invalid token format', async () => {
+    const getEventResponse = await request(app)
+      .get(`/api/v1/events/${createdEventId}`)
+      .set('Authorization', `invalidToken`)
+
+    expect(getEventResponse.status).toBe(401)
+    expect(getEventResponse.body).toBeDefined
+    expect(getEventResponse.body.type).toEqual('AuthenticationError')
+    expect(getEventResponse.body.errors[0].resource).toEqual('token')
+    expect(getEventResponse.body.errors[0].message).toEqual(
+      'Invalid token format.',
+    )
+  })
+
+  it('should handle a request with invalid token', async () => {
+    const getEventResponse = await request(app)
+      .get(`/api/v1/events/${createdEventId}`)
+      .set('Authorization', `Bearer a3sd541a96s84fa2s61`)
+
+    expect(getEventResponse.status).toBe(401)
+    expect(getEventResponse.body).toBeDefined
+    expect(getEventResponse.body.type).toEqual('AuthenticationError')
+    expect(getEventResponse.body.errors[0].resource).toEqual('token')
+    expect(getEventResponse.body.errors[0].message).toEqual('Invalid token.')
+  })
 })
