@@ -103,4 +103,19 @@ describe('Sign Up', () => {
       '"email" must be a valid email',
     )
   })
+
+  it('should handle a request with invalid password', async () => {
+    userData.password = 'abc'
+    const response = await request(app)
+      .post('/api/v1/users/sign-up')
+      .send(userData)
+      .set('Accept', 'application/json')
+    expect(response.status).toBe(422)
+    expect(response.body).toBeDefined()
+    expect(response.body.type).toEqual('Validation error')
+    expect(response.body.errors[0].resource).toEqual('password')
+    expect(response.body.errors[0].message).toEqual(
+      '"password" length must be at least 6 characters long',
+    )
+  })
 })
