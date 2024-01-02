@@ -76,4 +76,20 @@ describe('Get Events by day', () => {
     expect(getEventsByDayResponse.body.description).toBeDefined
     expect(getEventsByDayResponse.body.userId).toBeDefined
   })
+
+  it('should handle invalid data supplied', async () => {
+    const invalidDay: string = 'invalidDay'
+
+    const getEventsResponse = await request(app)
+      .get(`/api/v1/events?dayOfWeek=${invalidDay}`)
+      .set('Authorization', `Bearer ${token}`)
+
+    expect(getEventsResponse.status).toBe(400)
+    expect(getEventsResponse.body).toBeDefined
+    expect(getEventsResponse.body.type).toEqual('Validation error')
+    expect(getEventsResponse.body.errors[0].resource).toEqual('dayOfWeek')
+    expect(getEventsResponse.body.errors[0].message).toEqual(
+      'dayOfWeek must be a valid day of the week',
+    )
+  })
 })
