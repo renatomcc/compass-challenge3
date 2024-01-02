@@ -92,4 +92,46 @@ describe('Get Events by day', () => {
       'dayOfWeek must be a valid day of the week',
     )
   })
+
+  it('should handle a request with no token', async () => {
+    const getEventsByDayResponse = await request(app)
+      .get(`/api/v1/events?dayOfWeek=sunday`)
+      .set('Authorization', ``)
+
+    expect(getEventsByDayResponse.status).toBe(401)
+    expect(getEventsByDayResponse.body).toBeDefined
+    expect(getEventsByDayResponse.body.type).toEqual('AuthenticationError')
+    expect(getEventsByDayResponse.body.errors[0].resource).toEqual('token')
+    expect(getEventsByDayResponse.body.errors[0].message).toEqual(
+      'No token provided.',
+    )
+  })
+
+  it('should handle a request with invalid token format', async () => {
+    const getEventsByDayResponse = await request(app)
+      .get(`/api/v1/events?dayOfWeek=sunday`)
+      .set('Authorization', `invalidToken`)
+
+    expect(getEventsByDayResponse.status).toBe(401)
+    expect(getEventsByDayResponse.body).toBeDefined
+    expect(getEventsByDayResponse.body.type).toEqual('AuthenticationError')
+    expect(getEventsByDayResponse.body.errors[0].resource).toEqual('token')
+    expect(getEventsByDayResponse.body.errors[0].message).toEqual(
+      'Invalid token format.',
+    )
+  })
+
+  it('should handle a request with invalid token', async () => {
+    const getEventsByDayResponse = await request(app)
+      .get(`/api/v1/events?dayOfWeek=sunday`)
+      .set('Authorization', `Bearer a3sd541a96s84fa2s61`)
+
+    expect(getEventsByDayResponse.status).toBe(401)
+    expect(getEventsByDayResponse.body).toBeDefined
+    expect(getEventsByDayResponse.body.type).toEqual('AuthenticationError')
+    expect(getEventsByDayResponse.body.errors[0].resource).toEqual('token')
+    expect(getEventsByDayResponse.body.errors[0].message).toEqual(
+      'Invalid token.',
+    )
+  })
 })
