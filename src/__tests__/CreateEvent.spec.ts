@@ -4,6 +4,7 @@ import mongoose from 'mongoose'
 import User from '../model/User'
 import Event from '../model/Event'
 import IEvent from '../interfaces/Event'
+import EventsServices from '../services/EventsServices/EventsServices'
 
 describe('Create event', () => {
   let createdUserId: string
@@ -113,9 +114,7 @@ describe('Create event', () => {
     expect(createEventResponse.body).toBeDefined
     expect(createEventResponse.body.type).toEqual('AuthenticationError')
     expect(createEventResponse.body.errors[0].resource).toEqual('token')
-    expect(createEventResponse.body.errors[0].message).toEqual(
-      'Invalid token.',
-    )
+    expect(createEventResponse.body.errors[0].message).toEqual('Invalid token.')
   })
 
   it('should handle a request invalid data', async () => {
@@ -135,5 +134,21 @@ describe('Create event', () => {
     expect(createEventResponse.body.errors[0].message).toEqual(
       'dayOfWeek must be a valid day of the week',
     )
+  })
+
+  it('should handle a request with internal server error', async () => {
+    jest.spyOn(EventsServices, 'createEvent').mockImplementationOnce(() => {
+      throw new Error('Internal Server Error')
+    })
+
+    const createEventResponse = await request(app)
+      .post('/api/v1/events')
+      .send(eventData)
+      .set('Authorization', `Bearer ${token}`)
+
+    jest.spyOn(EventsServices, 'createEvent').mockRestore()
+    expect(createEventResponse.status).toBe(500)
+    expect(createEventResponse.body).toBeDefined
+    expect(createEventResponse.body.message).toEqual('Internal Server Error')
   })
 })
