@@ -49,7 +49,7 @@ describe('Create event', () => {
     }
   })
 
-  afterAll(async () => {
+  afterEach(async () => {
     if (createdUserId) {
       await User.findByIdAndDelete(createdUserId)
     }

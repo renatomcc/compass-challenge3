@@ -3,10 +3,12 @@ import app from '../app'
 import mongoose from 'mongoose'
 import User from '../model/User'
 import EventsServices from '../services/EventsServices/EventsServices'
+import Event from '../model/Event'
 
 describe('Delete Events by day', () => {
   let createdUserId: string
   let token: string
+  let createdEventId: string
 
   beforeAll(async () => {
     const userData = {
@@ -43,6 +45,9 @@ describe('Delete Events by day', () => {
   afterAll(async () => {
     if (createdUserId) {
       await User.findByIdAndDelete(createdUserId)
+    }
+    if (createdEventId) {
+      await Event.findByIdAndDelete(createdEventId)
     }
   })
   it('should delete and return all events on a specific day of the week', async () => {
@@ -152,10 +157,12 @@ describe('Delete Events by day', () => {
       dayOfWeek: 'sunday',
     }
 
-    await request(app)
+    const createdEventResponse = await request(app)
       .post('/api/v1/events')
       .send(eventData)
       .set('Authorization', `Bearer ${token}`)
+
+    createdEventId = createdEventResponse.body._id
 
     const dayOfWeek: string = 'sunday'
 
@@ -168,7 +175,7 @@ describe('Delete Events by day', () => {
     const deleteEventsResponse = await request(app)
       .delete(`/api/v1/events?dayOfWeek=${dayOfWeek}`)
       .set('Authorization', `Bearer ${token}`)
-      
+
     expect(deleteEventsResponse.status).toBe(500)
     expect(deleteEventsResponse.body).toBeDefined()
     expect(deleteEventsResponse.body.message).toEqual('Internal Server Error')

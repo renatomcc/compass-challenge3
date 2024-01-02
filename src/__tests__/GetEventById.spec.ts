@@ -56,7 +56,7 @@ describe('Get Event by id', () => {
     createdEventId = createdEventResponse.body._id
   })
 
-  afterAll(async () => {
+  afterEach(async () => {
     if (createdUserId) {
       await User.findByIdAndDelete(createdUserId)
     }

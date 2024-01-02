@@ -48,7 +48,7 @@ describe('Delete Event by id', () => {
       dayOfWeek: 'sunday',
     }
   })
-  afterAll(async () => {
+  afterEach(async () => {
     if (createdUserId) {
       await User.findByIdAndDelete(createdUserId)
     }

@@ -33,7 +33,7 @@ describe('Sign In', () => {
     createdUserId = signUpResponse.body._id
   })
 
-  afterAll(async () => {
+  afterEach(async () => {
     if (createdUserId) {
       await User.findByIdAndDelete(createdUserId)
     }
