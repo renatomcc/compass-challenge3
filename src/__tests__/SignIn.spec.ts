@@ -2,7 +2,6 @@ import request from 'supertest'
 import app from '../app'
 import mongoose from 'mongoose'
 import User from '../model/User'
-import ISignInUser from '../interfaces/SignIn'
 
 describe('Sign In', () => {
   let createdUserId: string
@@ -50,5 +49,21 @@ describe('Sign In', () => {
     expect(signInResponse.body.lastName).toBeDefined()
     expect(signInResponse.body.email).toBeDefined()
     expect(signInResponse.body.token).toBeDefined()
+  })
+
+  it('should handle a request with invalid email', async () => {
+    userLogin.email = 'shakirawakawaka.com'
+    const signInResponse = await request(app)
+      .post('/api/v1/users/sign-in')
+      .send(userLogin)
+      .set('Accept', 'application/json')
+
+    expect(signInResponse.status).toBe(400)
+    expect(signInResponse.body).toBeDefined()
+    expect(signInResponse.body.type).toEqual('Validation Error')
+    expect(signInResponse.body.errors[0].resource).toEqual('email')
+    expect(signInResponse.body.errors[0].message).toEqual(
+      '"email" must be a valid email',
+    )
   })
 })
