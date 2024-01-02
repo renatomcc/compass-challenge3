@@ -118,4 +118,19 @@ describe('Sign Up', () => {
       '"password" length must be at least 6 characters long',
     )
   })
+
+  it('should handle a request with passwords not matching', async () => {
+    userData.confirmPassword = 'abc'
+    const response = await request(app)
+      .post('/api/v1/users/sign-up')
+      .send(userData)
+      .set('Accept', 'application/json')
+    expect(response.status).toBe(422)
+    expect(response.body).toBeDefined()
+    expect(response.body.type).toEqual('Validation error')
+    expect(response.body.errors[0].resource).toEqual('confirmPassword')
+    expect(response.body.errors[0].message).toEqual(
+      '"confirmPassword" must match the password',
+    )
+  })
 })
