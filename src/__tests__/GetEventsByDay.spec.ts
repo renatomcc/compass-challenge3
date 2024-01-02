@@ -4,6 +4,7 @@ import mongoose from 'mongoose'
 import User from '../model/User'
 import Event from '../model/Event'
 import IEvent from '../interfaces/Event'
+import EventsServices from '../services/EventsServices/EventsServices'
 
 describe('Get Events by day', () => {
   let createdUserId: string
@@ -133,5 +134,23 @@ describe('Get Events by day', () => {
     expect(getEventsByDayResponse.body.errors[0].message).toEqual(
       'Invalid token.',
     )
+  })
+
+  it('should handle a request with internal server error', async () => {
+    jest
+      .spyOn(EventsServices, 'getAllEventsByDay')
+      .mockImplementationOnce(() => {
+        throw new Error('Internal Server Error')
+      })
+
+    const getEventsByDay = await request(app)
+      .get(`/api/v1/events`)
+      .set('Authorization', `Bearer ${token}`)
+
+    expect(getEventsByDay.status).toBe(500)
+    expect(getEventsByDay.body).toBeDefined()
+    expect(getEventsByDay.body.message).toEqual('Internal Server Error')
+
+    jest.spyOn(EventsServices, 'getAllEventsByDay').mockRestore()
   })
 })
