@@ -82,4 +82,18 @@ describe('Get Event by id', () => {
     expect(getEventResponse.body._id).toBeDefined
     expect(getEventResponse.body._id).toEqual(createdEventId)
   })
+
+  it('should handle invalid id format supplied', async () => {
+    const getEventResponse = await request(app)
+      .get(`/api/v1/events/invalidId`)
+      .set('Authorization', `Bearer ${token}`)
+
+    expect(getEventResponse.status).toBe(400)
+    expect(getEventResponse.body).toBeDefined
+    expect(getEventResponse.body.type).toBeDefined
+    expect(getEventResponse.body.errors).toBeDefined
+    expect(getEventResponse.body.type).toEqual('Validation error')
+    expect(getEventResponse.body.errors[0].resource).toEqual('id')
+    expect(getEventResponse.body.errors[0].message).toEqual('Invalid ObjectId')
+  })
 })
