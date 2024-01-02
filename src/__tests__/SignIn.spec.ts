@@ -7,7 +7,7 @@ describe('Sign In', () => {
   let createdUserId: string
   let userLogin: any
 
-  beforeAll(async () => {
+  beforeEach(async () => {
     const userData = {
       firstName: 'Shakira',
       lastName: 'Isabel',
@@ -80,5 +80,18 @@ describe('Sign In', () => {
     expect(signInResponse.body.errors[0].message).toEqual(
       'User with this email does not exist',
     )
+  })
+
+  it('should handle a request with incorrect password', async () => {
+    userLogin.password = 'invalidpassowrd'
+    const signInResponse = await request(app)
+      .post('/api/v1/users/sign-in')
+      .send(userLogin)
+      .set('Accept', 'application/json')
+    expect(signInResponse.status).toBe(401)
+    expect(signInResponse.body).toBeDefined()
+    expect(signInResponse.body.type).toEqual('InvalidCredentials')
+    expect(signInResponse.body.errors[0].resource).toEqual('password')
+    expect(signInResponse.body.errors[0].message).toEqual('Invalid password')
   })
 })
