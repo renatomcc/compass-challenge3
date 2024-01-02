@@ -144,7 +144,9 @@ describe('Sign Up', () => {
     expect(signUpResponse.body).toBeDefined()
     expect(signUpResponse.body.type).toEqual('Validation error')
     expect(signUpResponse.body.errors[0].resource).toEqual('email')
-    expect(signUpResponse.body.errors[0].message).toEqual('Email is already in use')
+    expect(signUpResponse.body.errors[0].message).toEqual(
+      'Email is already in use',
+    )
   })
 
   it('should handle a request with internal server error', async () => {
