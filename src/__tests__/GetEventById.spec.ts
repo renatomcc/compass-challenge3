@@ -4,6 +4,7 @@ import mongoose from 'mongoose'
 import User from '../model/User'
 import Event from '../model/Event'
 import IEvent from '../interfaces/Event'
+import EventsServices from '../services/EventsServices/EventsServices'
 
 describe('Get Event by id', () => {
   let createdUserId: string
@@ -147,5 +148,28 @@ describe('Get Event by id', () => {
     expect(getEventResponse.body.type).toEqual('Validation error')
     expect(getEventResponse.body.errors[0].resource).toEqual('id')
     expect(getEventResponse.body.errors[0].message).toEqual('Event not found')
+  })
+
+  it('should handle a request with internal server error', async () => {
+    const createdEventResponse = await request(app)
+      .post('/api/v1/events')
+      .send(eventData)
+      .set('Authorization', `Bearer ${token}`)
+
+    createdEventId = createdEventResponse.body._id
+
+    jest.spyOn(EventsServices, 'getEventById').mockImplementationOnce(() => {
+      throw new Error('Internal Server Error')
+    })
+
+    const getEventResponse = await request(app)
+      .get(`/api/v1/events/${createdEventId}`)
+      .set('Authorization', `Bearer ${token}`)
+
+    expect(getEventResponse.status).toBe(500)
+    expect(getEventResponse.body).toBeDefined()
+    expect(getEventResponse.body.message).toEqual('Internal Server Error')
+
+    jest.spyOn(EventsServices, 'getEventById').mockRestore()
   })
 })
