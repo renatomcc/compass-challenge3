@@ -2,16 +2,13 @@ import request from 'supertest'
 import app from '../app'
 import mongoose from 'mongoose'
 import User from '../model/User'
+import ISignInUser from '../interfaces/SignIn'
 
 describe('Sign In', () => {
   let createdUserId: string
+  let userLogin: any
 
-  afterAll(async () => {
-    if (createdUserId) {
-      await User.findByIdAndDelete(createdUserId)
-    }
-  })
-  it('should logged a existing user', async () => {
+  beforeAll(async () => {
     const userData = {
       firstName: 'Shakira',
       lastName: 'Isabel',
@@ -23,7 +20,7 @@ describe('Sign In', () => {
       confirmPassword: 'hipsdontlie',
     }
 
-    const userLogin = {
+    userLogin = {
       email: 'shakira@wakawaka.com',
       password: 'hipsdontlie',
     }
@@ -34,7 +31,14 @@ describe('Sign In', () => {
       .set('Accept', 'application/json')
 
     createdUserId = signUpResponse.body._id
+  })
 
+  afterAll(async () => {
+    if (createdUserId) {
+      await User.findByIdAndDelete(createdUserId)
+    }
+  })
+  it('should logged a existing user', async () => {
     const signInResponse = await request(app)
       .post('/api/v1/users/sign-in')
       .send(userLogin)
