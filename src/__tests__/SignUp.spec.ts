@@ -65,13 +65,27 @@ describe('Sign Up', () => {
       .post('/api/v1/users/sign-up')
       .send(userData)
       .set('Accept', 'application/json')
-    console.log(response.body)
     expect(response.status).toBe(422)
     expect(response.body).toBeDefined()
     expect(response.body.type).toEqual('Validation error')
     expect(response.body.errors[0].resource).toEqual('firstName')
     expect(response.body.errors[0].message).toEqual(
       '"firstName" must be a string',
+    )
+  })
+
+  it('should handle a request with invalid date of birth', async () => {
+    userData.birthDate = new Date('2025-02-02')
+    const response = await request(app)
+      .post('/api/v1/users/sign-up')
+      .send(userData)
+      .set('Accept', 'application/json')
+    expect(response.status).toBe(422)
+    expect(response.body).toBeDefined()
+    expect(response.body.type).toEqual('Validation error')
+    expect(response.body.errors[0].resource).toEqual('birthDate')
+    expect(response.body.errors[0].message).toEqual(
+      '"birthDate" date cannot be in the future',
     )
   })
 })
