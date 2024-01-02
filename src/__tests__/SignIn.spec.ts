@@ -66,4 +66,19 @@ describe('Sign In', () => {
       '"email" must be a valid email',
     )
   })
+
+  it('should handle a request with email not found', async () => {
+    userLogin.email = 'shakira2@wakawaka.com'
+    const signInResponse = await request(app)
+      .post('/api/v1/users/sign-in')
+      .send(userLogin)
+      .set('Accept', 'application/json')
+    expect(signInResponse.status).toBe(404)
+    expect(signInResponse.body).toBeDefined()
+    expect(signInResponse.body.type).toEqual('UserNotFound')
+    expect(signInResponse.body.errors[0].resource).toEqual('email')
+    expect(signInResponse.body.errors[0].message).toEqual(
+      'User with this email does not exist',
+    )
+  })
 })
