@@ -94,6 +94,22 @@ describe('Get Events by day', () => {
     )
   })
 
+  it('should handle a request with day without any event', async () => {
+    if (createdEventId) {
+      await Event.findByIdAndDelete(createdEventId)
+    }
+    const getEventsByDayResponse = await request(app)
+      .get(`/api/v1/events?dayOfWeek=${dayOfWeek}`)
+      .set('Authorization', `Bearer ${token}`)
+    expect(getEventsByDayResponse.status).toBe(404)
+    expect(getEventsByDayResponse.body).toBeDefined
+    expect(getEventsByDayResponse.body.type).toEqual('Not Found')
+    expect(getEventsByDayResponse.body.errors[0].resource).toEqual('dayOfWeek')
+    expect(getEventsByDayResponse.body.errors[0].message).toEqual(
+      'No events found on this day',
+    )
+  })
+
   it('should handle a request with no token', async () => {
     const getEventsByDayResponse = await request(app)
       .get(`/api/v1/events?dayOfWeek=sunday`)
