@@ -88,4 +88,19 @@ describe('Sign Up', () => {
       '"birthDate" date cannot be in the future',
     )
   })
+
+  it('should handle a request with invalid email', async () => {
+    userData.email = 'shakirawakawaka.com'
+    const response = await request(app)
+      .post('/api/v1/users/sign-up')
+      .send(userData)
+      .set('Accept', 'application/json')
+    expect(response.status).toBe(422)
+    expect(response.body).toBeDefined()
+    expect(response.body.type).toEqual('Validation error')
+    expect(response.body.errors[0].resource).toEqual('email')
+    expect(response.body.errors[0].message).toEqual(
+      '"email" must be a valid email',
+    )
+  })
 })
