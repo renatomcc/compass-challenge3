@@ -2,6 +2,7 @@ import request from 'supertest'
 import app from '../app'
 import mongoose from 'mongoose'
 import User from '../model/User'
+import SignInService from '../services/UserServices/SignInService'
 
 describe('Sign In', () => {
   let createdUserId: string
@@ -93,5 +94,22 @@ describe('Sign In', () => {
     expect(signInResponse.body.type).toEqual('InvalidCredentials')
     expect(signInResponse.body.errors[0].resource).toEqual('password')
     expect(signInResponse.body.errors[0].message).toEqual('Invalid password')
+  })
+
+  it('should handle a request with internal server error', async () => {
+    jest.spyOn(SignInService, 'execute').mockImplementationOnce(() => {
+      throw new Error('Internal Server Error')
+    })
+
+    const signInResponse = await request(app)
+      .post('/api/v1/users/sign-in')
+      .send(userLogin)
+      .set('Accept', 'application/json')
+
+    expect(signInResponse.status).toBe(500)
+    expect(signInResponse.body).toBeDefined()
+    expect(signInResponse.body.message).toEqual('Internal Server Error')
+
+    jest.spyOn(SignInService, 'execute').mockRestore()
   })
 })
