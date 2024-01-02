@@ -3,20 +3,16 @@ import app from '../app'
 import mongoose from 'mongoose'
 import User from '../model/User'
 import Event from '../model/Event'
+import IEvent from '../interfaces/Event'
 
 describe('Get Events by day', () => {
   let createdUserId: string
   let createdEventId: string
+  let token: string
+  let eventData: IEvent
+  let dayOfWeek: string
 
-  afterAll(async () => {
-    if (createdUserId) {
-      await User.findByIdAndDelete(createdUserId)
-    }
-    if (createdEventId) {
-      await Event.findByIdAndDelete(createdEventId)
-    }
-  })
-  it('should return all events on a specific day of the week', async () => {
+  beforeAll(async () => {
     const userData = {
       firstName: 'Shakira',
       lastName: 'Isabel',
@@ -45,9 +41,9 @@ describe('Get Events by day', () => {
       .send(userLogin)
       .set('Accept', 'application/json')
 
-    const token = signInResponse.body.token
+    token = signInResponse.body.token
 
-    const eventData = {
+    eventData = {
       description: 'Show',
       dayOfWeek: 'sunday',
     }
@@ -58,8 +54,18 @@ describe('Get Events by day', () => {
       .set('Authorization', `Bearer ${token}`)
 
     createdEventId = createEventResponse.body._id
-    const dayOfWeek: string = 'sunday'
+    dayOfWeek = 'sunday'
+  })
 
+  afterAll(async () => {
+    if (createdUserId) {
+      await User.findByIdAndDelete(createdUserId)
+    }
+    if (createdEventId) {
+      await Event.findByIdAndDelete(createdEventId)
+    }
+  })
+  it('should return all events on a specific day of the week', async () => {
     const getEventsByDayResponse = await request(app)
       .get(`/api/v1/events?dayOfWeek=${dayOfWeek}`)
       .set('Authorization', `Bearer ${token}`)
