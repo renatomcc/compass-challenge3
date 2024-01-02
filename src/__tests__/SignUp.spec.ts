@@ -2,16 +2,13 @@ import request from 'supertest'
 import app from '../app'
 import mongoose from 'mongoose'
 import User from '../model/User'
+import ISignUpUser from '../interfaces/SignUp'
 
 describe('Sign Up', () => {
   let createdUserId: string
+  let userData: ISignUpUser
 
-  afterAll(async () => {
-    if (createdUserId) {
-      await User.findByIdAndDelete(createdUserId)
-    }
-  })
-  it('should create a new user', async () => {
+  beforeAll(async () => {
     const userData = {
       firstName: 'Shakira',
       lastName: 'Isabel',
@@ -22,7 +19,14 @@ describe('Sign Up', () => {
       password: 'hipsdontlie',
       confirmPassword: 'hipsdontlie',
     }
+  })
 
+  afterAll(async () => {
+    if (createdUserId) {
+      await User.findByIdAndDelete(createdUserId)
+    }
+  })
+  it('should create a new user', async () => {
     const response = await request(app)
       .post('/api/v1/users/sign-up')
       .send(userData)
