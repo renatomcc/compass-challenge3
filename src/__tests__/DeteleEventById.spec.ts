@@ -4,6 +4,7 @@ import mongoose from 'mongoose'
 import User from '../model/User'
 import Event from '../model/Event'
 import IEvent from '../interfaces/Event'
+import EventsServices from '../services/EventsServices/EventsServices'
 
 describe('Delete Event by id', () => {
   let createdUserId: string
@@ -145,5 +146,28 @@ describe('Delete Event by id', () => {
     expect(deleteEventResponse.body.errors[0].message).toEqual(
       'Event not found',
     )
+  })
+
+  it('should handle a request with internal server error', async () => {
+    const createdEventResponse = await request(app)
+      .post('/api/v1/events')
+      .send(eventData)
+      .set('Authorization', `Bearer ${token}`)
+
+    createdEventId = createdEventResponse.body._id
+
+    jest.spyOn(EventsServices, 'deleteEventById').mockImplementationOnce(() => {
+      throw new Error('Internal Server Error')
+    })
+
+    const deleteEventResponse = await request(app)
+      .delete(`/api/v1/events/${createdEventId}`)
+      .set('Authorization', `Bearer ${token}`)
+
+    expect(deleteEventResponse.status).toBe(500)
+    expect(deleteEventResponse.body).toBeDefined()
+    expect(deleteEventResponse.body.message).toEqual('Internal Server Error')
+
+    jest.spyOn(EventsServices, 'deleteEventById').mockRestore()
   })
 })
