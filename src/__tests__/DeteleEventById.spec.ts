@@ -68,7 +68,7 @@ describe('Delete Event by id', () => {
     const deleteEventResponse = await request(app)
       .delete(`/api/v1/events/${createdEventId}`)
       .set('Authorization', `Bearer ${token}`)
-      
+
     expect(deleteEventResponse.status).toBe(204)
     expect(deleteEventResponse.body).toBeDefined
     expect(deleteEventResponse.body.description).toBeDefined
@@ -131,5 +131,19 @@ describe('Delete Event by id', () => {
     expect(deleteEventResponse.body.type).toEqual('AuthenticationError')
     expect(deleteEventResponse.body.errors[0].resource).toEqual('token')
     expect(deleteEventResponse.body.errors[0].message).toEqual('Invalid token.')
+  })
+
+  it('should handle a request with id not found', async () => {
+    const invalidEventId = '659350d88aee76d7a645c208'
+    const deleteEventResponse = await request(app)
+      .delete(`/api/v1/events/${invalidEventId}`)
+      .set('Authorization', `Bearer ${token}`)
+    expect(deleteEventResponse.status).toBe(404)
+    expect(deleteEventResponse.body).toBeDefined
+    expect(deleteEventResponse.body.type).toEqual('Validation error')
+    expect(deleteEventResponse.body.errors[0].resource).toEqual('id')
+    expect(deleteEventResponse.body.errors[0].message).toEqual(
+      'Event not found',
+    )
   })
 })
