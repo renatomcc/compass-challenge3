@@ -3,17 +3,6 @@ import Event from '../../model/Event'
 import ValidationError from '../../errors/ValidationError'
 
 export default async function CheckEventByIdValidator(payload: string) {
-  if (!payload) {
-    const invalidIdError: ValidationError = {
-      resource: 'id',
-      message: 'No id provided.',
-    }
-    return {
-      type: 'Validation error',
-      errors: [invalidIdError],
-      statusCode: 400,
-    }
-  }
   if (!mongoose.Types.ObjectId.isValid(payload)) {
     const invalidIdError: ValidationError = {
       resource: 'id',
