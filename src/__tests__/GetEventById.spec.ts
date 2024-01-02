@@ -136,4 +136,16 @@ describe('Get Event by id', () => {
     expect(getEventResponse.body.errors[0].resource).toEqual('token')
     expect(getEventResponse.body.errors[0].message).toEqual('Invalid token.')
   })
+
+  it('should handle a request with id not found', async () => {
+    const invalidEventId = '659350d88aee76d7a645c208'
+    const getEventResponse = await request(app)
+      .get(`/api/v1/events/${invalidEventId}`)
+      .set('Authorization', `Bearer ${token}`)
+    expect(getEventResponse.status).toBe(404)
+    expect(getEventResponse.body).toBeDefined
+    expect(getEventResponse.body.type).toEqual('Validation error')
+    expect(getEventResponse.body.errors[0].resource).toEqual('id')
+    expect(getEventResponse.body.errors[0].message).toEqual('Event not found')
+  })
 })
