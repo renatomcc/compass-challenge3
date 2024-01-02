@@ -2,6 +2,7 @@ import request from 'supertest'
 import app from '../app'
 import mongoose from 'mongoose'
 import User from '../model/User'
+import EventsServices from '../services/EventsServices/EventsServices'
 
 describe('Delete Events by day', () => {
   let createdUserId: string
@@ -93,7 +94,7 @@ describe('Delete Events by day', () => {
     const deleteEventsResponse = await request(app)
       .delete(`/api/v1/events?dayOfWeek=${dayOfWeek}`)
       .set('Authorization', `Bearer ${token}`)
-      
+
     expect(deleteEventsResponse.status).toBe(400)
     expect(deleteEventsResponse.body).toBeDefined
     expect(deleteEventsResponse.body.type).toEqual('Validation error')
@@ -107,7 +108,7 @@ describe('Delete Events by day', () => {
     const deleteEventsResponse = await request(app)
       .delete(`/api/v1/events?dayOfWeek=sunday`)
       .set('Authorization', ``)
-      
+
     expect(deleteEventsResponse.status).toBe(401)
     expect(deleteEventsResponse.body).toBeDefined
     expect(deleteEventsResponse.body.type).toEqual('AuthenticationError')
@@ -121,7 +122,7 @@ describe('Delete Events by day', () => {
     const deleteEventsResponse = await request(app)
       .delete(`/api/v1/events?dayOfWeek=sunday`)
       .set('Authorization', `invalidToken`)
-      
+
     expect(deleteEventsResponse.status).toBe(401)
     expect(deleteEventsResponse.body).toBeDefined
     expect(deleteEventsResponse.body.type).toEqual('AuthenticationError')
@@ -135,7 +136,7 @@ describe('Delete Events by day', () => {
     const deleteEventsResponse = await request(app)
       .delete(`/api/v1/events?dayOfWeek=sunday`)
       .set('Authorization', `Bearer a3sd541a96s84fa2s61`)
-      
+
     expect(deleteEventsResponse.status).toBe(401)
     expect(deleteEventsResponse.body).toBeDefined
     expect(deleteEventsResponse.body.type).toEqual('AuthenticationError')
@@ -143,5 +144,35 @@ describe('Delete Events by day', () => {
     expect(deleteEventsResponse.body.errors[0].message).toEqual(
       'Invalid token.',
     )
+  })
+
+  it('should handle a request with internal server error', async () => {
+    const eventData = {
+      description: 'Show',
+      dayOfWeek: 'sunday',
+    }
+
+    await request(app)
+      .post('/api/v1/events')
+      .send(eventData)
+      .set('Authorization', `Bearer ${token}`)
+
+    const dayOfWeek: string = 'sunday'
+
+    jest
+      .spyOn(EventsServices, 'deleteEventsByDay')
+      .mockImplementationOnce(() => {
+        throw new Error('Internal Server Error')
+      })
+
+    const deleteEventsResponse = await request(app)
+      .delete(`/api/v1/events?dayOfWeek=${dayOfWeek}`)
+      .set('Authorization', `Bearer ${token}`)
+      
+    expect(deleteEventsResponse.status).toBe(500)
+    expect(deleteEventsResponse.body).toBeDefined()
+    expect(deleteEventsResponse.body.message).toEqual('Internal Server Error')
+
+    jest.spyOn(EventsServices, 'deleteEventsByDay').mockRestore()
   })
 })
