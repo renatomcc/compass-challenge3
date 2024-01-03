@@ -50,28 +50,15 @@ export default class SignInService {
       )
     }
 
-    try {
-      const token = jwt.sign({ userId: existingUser._id }, process.env.SECRET!)
+    const token = jwt.sign({ userId: existingUser._id }, process.env.SECRET!)
 
-      const result = {
-        firstName: existingUser.firstName,
-        lastName: existingUser.lastName,
-        email: payload.email,
-        token: token,
-      }
-
-      return result
-    } catch (error) {
-      throw new CustomError(
-        'AuthenticationError',
-        [
-          {
-            resource: 'token',
-            message: 'error generating the token',
-          },
-        ],
-        500,
-      )
+    const result = {
+      firstName: existingUser.firstName,
+      lastName: existingUser.lastName,
+      email: payload.email,
+      token: token,
     }
+
+    return result
   }
 }
