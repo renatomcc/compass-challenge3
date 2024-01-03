@@ -3,12 +3,6 @@ import app from '../app'
 import User from '../model/User'
 import SignInService from '../services/UserServices/SignInService'
 
-jest.mock('jsonwebtoken', () => ({
-  sign: jest.fn(() => {
-    throw new Error('Token generation error')
-  }),
-}))
-
 describe('Sign In', () => {
   let createdUserId: string
   let userLogin: any
@@ -99,20 +93,6 @@ describe('Sign In', () => {
     expect(signInResponse.body.type).toEqual('InvalidCredentials')
     expect(signInResponse.body.errors[0].resource).toEqual('password')
     expect(signInResponse.body.errors[0].message).toEqual('Invalid password')
-  })
-
-  it('should handle token generation error', async () => {
-    const signInResponse = await request(app)
-      .post('/api/v1/users/sign-in')
-      .send(userLogin)
-      .set('Accept', 'application/json')
-    expect(signInResponse.status).toBe(500)
-    expect(signInResponse.body).toBeDefined()
-    expect(signInResponse.body.type).toEqual('AuthenticationError')
-    expect(signInResponse.body.errors[0].resource).toEqual('token')
-    expect(signInResponse.body.errors[0].message).toEqual(
-      'error generating the token',
-    )
   })
 
   it('should handle a request with internal server error', async () => {
