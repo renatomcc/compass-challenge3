@@ -2,7 +2,7 @@ import express, { Router } from 'express'
 import SignUpController from '../controllers/UserController/SignUpController'
 import SignInController from '../controllers/UserController/SignInController'
 import EventsController from '../controllers/EventsController/EventsController'
-import { authenticationMiddleware } from '../middlwares/auth'
+import { authenticationMiddleware } from '../middleware/auth'
 const Routes: Router = express.Router()
 
 const prefix = '/api/v1'
