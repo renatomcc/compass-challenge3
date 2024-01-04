@@ -3,6 +3,7 @@ import SignUpController from '../controllers/UserController/SignUpController'
 import SignInController from '../controllers/UserController/SignInController'
 import EventsController from '../controllers/EventsController/EventsController'
 import { authenticationMiddleware } from '../middleware/auth'
+import { query } from 'express-validator'
 const Routes: Router = express.Router()
 
 const prefix = '/api/v1'
@@ -17,6 +18,11 @@ Routes.post(`${prefix}/users/sign-up`, SignUpController.handle)
   .get(
     `${prefix}/events`,
     authenticationMiddleware,
+    [
+      query('dayOfWeek').isString().notEmpty(),
+      query('number').optional().isInt({ min: 1 }).toInt(),
+      query('page').optional().isInt({ min: 1 }).toInt(),
+    ],
     EventsController.getAllEventsByDay,
   )
   .delete(

@@ -26,8 +26,8 @@ export default class EventsServices {
 
     return newEvent
   }
-  static async getAllEventsByDay(payload: string, token: string) {
-    const validationResponse = CheckEventsByDayValidator(payload)
+  static async getAllEventsByDay(dayOfWeek: string, token: string, number: number, skip: number) {
+    const validationResponse = CheckEventsByDayValidator(dayOfWeek)
     const decodedToken = jwt.verify(token, process.env.SECRET!) as JwtPayload
     const userId = decodedToken.userId
     if (validationResponse.statusCode !== 200) {
@@ -37,7 +37,7 @@ export default class EventsServices {
         validationResponse.statusCode,
       )
     }
-    const events = await EventsRepository.getAllEventsByDay(payload, userId)
+    const events = await EventsRepository.getAllEventsByDay(dayOfWeek, userId, number, skip);
     if (!events.length) {
       throw new CustomError(
         'Not Found',

@@ -11,8 +11,10 @@ export default class EventsRepository {
 
     return newEvent
   }
-  static async getAllEventsByDay(dayOfWeek: string, userId: string) {
+  static async getAllEventsByDay(dayOfWeek: string, userId: string, number: number, skip: number) {
     const events = await Event.find({ dayOfWeek, userId })
+      .skip(skip)
+      .limit(number)
     return events
   }
   static async deleteEventsByDay(dayOfWeek: string, userId: string) {
