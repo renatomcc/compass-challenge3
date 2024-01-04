@@ -1,10 +1,10 @@
 # Compass Challenge 3 API
 
-## Overview
+## 🔎 Overview
 
 This repository contains the source code for the Compass Challenge 3 API, a RESTful API built using Express and MongoDB. The API provides endpoints for managing events and user authentication.
 
-## Table of Contents
+## 🗂️ Table of Contents
 
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
@@ -14,11 +14,9 @@ This repository contains the source code for the Compass Challenge 3 API, a REST
 - [Routes](#routes)
 - [Authentication](#authentication)
 - [Testing](#testing)
-- [Contributing](#contributing)
-- [License](#license)
 
   
-## Technologies Used
+## 🛠️ Technologies Used
 
 - Node.js v20.10.5
 - MongoDB v8.0.3
@@ -29,7 +27,7 @@ This repository contains the source code for the Compass Challenge 3 API, a REST
 - Eslint v8.56.0
 - Prettier v3.1.1
 
-## Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
 
@@ -53,12 +51,14 @@ This repository contains the source code for the Compass Challenge 3 API, a REST
 
    Create a .env file in the root directory and add the following:
 
-   env
+    ```
+   .env
    MONGO_URL=your-mongodb-connection-string
    SECRET=your-secret-key
-   PORT=your-preferred-port
-
-   Replace your-mongodb-connection-string with your MongoDB connection string and set a secure SECRET for JWT token generation.
+   PORT=your-preferred-port    
+- Replace your-mongodb-connection-string with your MongoDB connection string 
+- Replace your-preferred-port with your preferred port
+- Set a secure SECRET for JWT token generation.
 
 4. **Run the application:**
 
@@ -85,7 +85,7 @@ The project follows the following structure:
 
 The API provides endpoints for creating, retrieving, and deleting events. User authentication endpoints for signing up and signing in are also available.
 
-## Routes
+## 🔴 Routes
 
 - **POST /api/v1/users/sign-up:** Sign up a new user.
 
@@ -101,50 +101,50 @@ The API provides endpoints for creating, retrieving, and deleting events. User a
     "password": "string",
     "confirmPassword": "string"
   }
+
+- **POST /api/v1/users/sign-in:** Sign in an existing user.
   
-- **POST /api/v1/users/sign-in: Sign in an existing user.
   Example Payload:
   ```json
   {
-  "email": "string",
-  "password": "string"
+    "email": "string",
+    "password": "string"
   }
 
-- **POST /api/v1/events: Create a new event.
+- **POST /api/v1/events:** Create a new event.
+  
   Example Payload:
   ```json
   {
-  "description": "string",
-  "dayOfWeek": "string"
+    "description": "string",
+    "dayOfWeek": "string"
   }
+
+- **GET /api/v1/events:** Get all events for a specific day.
   
-- **GET /api/v1/events: Get all events for a specific day.
   Example params:
   ```
   {{URL}}/api/v1/events?dayOfWeek=string (day of the week)
+- **DELETE /api/v1/events:** Delete all events for a specific day.
   
-   
-- **DELETE /api/v1/events: Delete all events for a specific day.
   Example params:
   ```
   {{URL}}/api/v1/events?dayOfWeek=string (day of the week)
+- **GET /api/v1/events/:id:** Get a specific event by ID.
   
-- **GET /api/v1/events/:id: Get a specific event by ID.
   Example params:
   ```
   {{URL}}/api/v1/events/id (event id)
-
-
-- **DELETE /api/v1/events/:id: Delete a specific event by ID.
+- **DELETE /api/v1/events/:id:** Delete a specific event by ID.
+  
   Example params:
   ```
   {{URL}}/api/v1/events/id (event id)
-
-## Authentication
+## ✔️ Authentication
 
 The API uses JWT for user authentication. Include the JWT token in the Authorization header for protected routes.
 
-## Testing
+## 🧪 Testing
 
 Run tests using:
 
