@@ -24,14 +24,7 @@ export default class EventsServices {
       decodedToken.userId,
     )
 
-    const formattedResult = {
-      _id: newEvent._id,
-      description: newEvent.description,
-      dayOfWeek: newEvent.dayOfWeek,
-      userId: newEvent.userId,
-    }
-
-    return formattedResult
+    return newEvent
   }
   static async getAllEventsByDay(payload: string, token: string) {
     const validationResponse = CheckEventsByDayValidator(payload)
