@@ -17,6 +17,18 @@ This repository contains the source code for the Compass Challenge 3 API, a REST
 - [Contributing](#contributing)
 - [License](#license)
 
+  
+## Technologies Used
+
+- Node.js v20.10.5
+- MongoDB v8.0.3
+- TypeScript
+- Express v4.18.2
+- JSON Web Token (JWT) v9.0.2
+- Joi v17.11.0
+- Eslint v8.56.0
+- Prettier v3.1.1
+
 ## Getting Started
 
 ### Prerequisites
@@ -52,7 +64,7 @@ This repository contains the source code for the Compass Challenge 3 API, a REST
 
    ```bash
    npm start
-
+   ```
    The API will be accessible at http://localhost:your-preferred-port/api/v1.
 
 ## Project Structure
@@ -75,9 +87,37 @@ The API provides endpoints for creating, retrieving, and deleting events. User a
 
 ## Routes
 
-- POST /api/v1/users/sign-up: Sign up a new user.
-- POST /api/v1/users/sign-in: Sign in an existing user.
-- POST /api/v1/events: Create a new event.
+- **POST /api/v1/users/sign-up:** Sign up a new user.
+
+  Example Payload:
+  ```json
+  {
+    "firstName": "string",
+    "lastName": "string",
+    "birthDate": "string (YYYY-MM-DD)",
+    "city": "string",
+    "country": "string",
+    "email": "string",
+    "password": "string",
+    "confirmPassword": "string"
+  }```
+  
+- **POST /api/v1/users/sign-in: Sign in an existing user.
+  Example Payload:
+  ```json
+  {
+  "email": "string",
+  "password": "string"
+}```
+
+- **POST /api/v1/events: Create a new event.
+  Example Payload:
+  ```json
+  {
+  "description": "string",
+  "dayOfWeek": "string"
+  }
+  
 - GET /api/v1/events: Get all events for a specific day.
 - DELETE /api/v1/events: Delete all events for a specific day.
 - GET /api/v1/events/:id: Get a specific event by ID.
