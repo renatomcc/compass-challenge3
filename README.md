@@ -100,7 +100,7 @@ The API provides endpoints for creating, retrieving, and deleting events. User a
     "email": "string",
     "password": "string",
     "confirmPassword": "string"
-  }```
+  }
   
 - **POST /api/v1/users/sign-in: Sign in an existing user.
   Example Payload:
@@ -108,7 +108,7 @@ The API provides endpoints for creating, retrieving, and deleting events. User a
   {
   "email": "string",
   "password": "string"
-}```
+  }
 
 - **POST /api/v1/events: Create a new event.
   Example Payload:
@@ -118,10 +118,27 @@ The API provides endpoints for creating, retrieving, and deleting events. User a
   "dayOfWeek": "string"
   }
   
-- GET /api/v1/events: Get all events for a specific day.
-- DELETE /api/v1/events: Delete all events for a specific day.
-- GET /api/v1/events/:id: Get a specific event by ID.
-- DELETE /api/v1/events/:id: Delete a specific event by ID.
+- **GET /api/v1/events: Get all events for a specific day.
+  Example params:
+  ```
+  {{URL}}/api/v1/events?dayOfWeek=string (day of the week)
+  
+   
+- **DELETE /api/v1/events: Delete all events for a specific day.
+  Example params:
+  ```
+  {{URL}}/api/v1/events?dayOfWeek=string (day of the week)
+  
+- **GET /api/v1/events/:id: Get a specific event by ID.
+  Example params:
+  ```
+  {{URL}}/api/v1/events/id (event id)
+
+
+- **DELETE /api/v1/events/:id: Delete a specific event by ID.
+  Example params:
+  ```
+  {{URL}}/api/v1/events/id (event id)
 
 ## Authentication
 
