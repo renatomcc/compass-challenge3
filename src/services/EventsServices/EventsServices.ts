@@ -47,7 +47,15 @@ export default class EventsServices {
     if (description) {
       query.description = { $regex: new RegExp(description, 'i') }
     }
-    const events = await EventsRepository.getAllEventsByDay(query, number, skip)
+    const events = await EventsRepository.getAllEventsByDayWithoutFilter(
+      query.dayOfWeek,
+      query.userId,
+    )
+    const filteredEvents = await EventsRepository.getAllEventsByDay(
+      query,
+      number,
+      skip,
+    )
     if (!events.length) {
       throw new CustomError(
         'Not Found',
@@ -60,7 +68,20 @@ export default class EventsServices {
         404,
       )
     }
-    return events
+
+    if (events.length && !filteredEvents.length) {
+      throw new CustomError(
+        'Not Found',
+        [
+          {
+            resource: 'query',
+            message: 'No events found with those specific queries',
+          },
+        ],
+        404,
+      )
+    }
+    return filteredEvents
   }
   static async deleteEventsByDay(payload: string, token: string) {
     const validationResponse = CheckEventsByDayValidator(payload)
