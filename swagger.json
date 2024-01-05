@@ -384,7 +384,7 @@
           }
         ],
         "responses": {
-          "204": {
+          "200": {
             "description": "List of deleteDailyEvents",
             "content": {
               "application/json": {
