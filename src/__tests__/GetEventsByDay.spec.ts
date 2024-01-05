@@ -110,6 +110,31 @@ describe('Get Events by day', () => {
     )
   })
 
+  it('should handle a request with specific queries without any event', async () => {
+    await request(app)
+      .post('/api/v1/events')
+      .send(eventData)
+      .set('Authorization', `Bearer ${token}`)
+
+    const description = 'invalidDescription'
+    const number: number = 10
+    const page: number = 10
+
+    const getEventsByDayResponse = await request(app)
+      .get(
+        `/api/v1/events?dayOfWeek=${dayOfWeek}&description=${description}&number=${number}&page=${page}`,
+      )
+      .set('Authorization', `Bearer ${token}`)
+
+    expect(getEventsByDayResponse.status).toBe(404)
+    expect(getEventsByDayResponse.body).toBeDefined()
+    expect(getEventsByDayResponse.body.type).toEqual('Not Found')
+    expect(getEventsByDayResponse.body.errors[0].resource).toEqual('query')
+    expect(getEventsByDayResponse.body.errors[0].message).toEqual(
+      'No events found with those specific queries',
+    )
+  })
+
   it('should handle a request with no token', async () => {
     const getEventsByDayResponse = await request(app)
       .get(`/api/v1/events?dayOfWeek=sunday`)

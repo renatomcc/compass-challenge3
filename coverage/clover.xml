@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1704419420566" clover="3.2.0">
-  <project timestamp="1704419420566" name="All files">
-    <metrics statements="228" coveredstatements="219" conditionals="89" coveredconditionals="72" methods="40" coveredmethods="38" elements="357" coveredelements="329" complexity="0" loc="228" ncloc="228" packages="13" files="21" classes="21"/>
+<coverage generated="1704423618408" clover="3.2.0">
+  <project timestamp="1704423618408" name="All files">
+    <metrics statements="228" coveredstatements="222" conditionals="89" coveredconditionals="76" methods="40" coveredmethods="38" elements="357" coveredelements="336" complexity="0" loc="228" ncloc="228" packages="13" files="21" classes="21"/>
     <package name="src">
       <metrics statements="20" coveredstatements="14" conditionals="4" coveredconditionals="2" methods="4" coveredmethods="2"/>
       <file name="app.ts" path="D:\Compass-challenge3\src\app.ts">
@@ -32,28 +32,28 @@
       </file>
     </package>
     <package name="src.controllers.EventsController">
-      <metrics statements="44" coveredstatements="43" conditionals="16" coveredconditionals="14" methods="5" coveredmethods="5"/>
+      <metrics statements="44" coveredstatements="44" conditionals="16" coveredconditionals="16" methods="5" coveredmethods="5"/>
       <file name="EventsController.ts" path="D:\Compass-challenge3\src\controllers\EventsController\EventsController.ts">
-        <metrics statements="44" coveredstatements="43" conditionals="16" coveredconditionals="14" methods="5" coveredmethods="5"/>
-        <line num="9" count="12" type="stmt"/>
-        <line num="10" count="12" type="stmt"/>
-        <line num="11" count="12" type="stmt"/>
-        <line num="12" count="12" type="stmt"/>
-        <line num="13" count="10" type="stmt"/>
+        <metrics statements="44" coveredstatements="44" conditionals="16" coveredconditionals="16" methods="5" coveredmethods="5"/>
+        <line num="9" count="13" type="stmt"/>
+        <line num="10" count="13" type="stmt"/>
+        <line num="11" count="13" type="stmt"/>
+        <line num="12" count="13" type="stmt"/>
+        <line num="13" count="11" type="stmt"/>
         <line num="15" count="2" type="cond" truecount="2" falsecount="0"/>
         <line num="16" count="1" type="stmt"/>
         <line num="20" count="1" type="stmt"/>
-        <line num="26" count="4" type="stmt"/>
-        <line num="27" count="4" type="stmt"/>
-        <line num="29" count="4" type="cond" truecount="1" falsecount="1"/>
-        <line num="30" count="0" type="stmt"/>
-        <line num="32" count="4" type="stmt"/>
-        <line num="33" count="4" type="cond" truecount="2" falsecount="0"/>
-        <line num="34" count="4" type="stmt"/>
-        <line num="35" count="4" type="stmt"/>
+        <line num="26" count="5" type="stmt"/>
+        <line num="27" count="5" type="stmt"/>
+        <line num="29" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="32" count="5" type="stmt"/>
+        <line num="33" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="34" count="5" type="stmt"/>
+        <line num="35" count="5" type="stmt"/>
         <line num="42" count="1" type="stmt"/>
-        <line num="44" count="3" type="cond" truecount="2" falsecount="0"/>
-        <line num="45" count="2" type="stmt"/>
+        <line num="44" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="45" count="3" type="stmt"/>
         <line num="49" count="1" type="stmt"/>
         <line num="54" count="3" type="stmt"/>
         <line num="55" count="3" type="stmt"/>
@@ -108,10 +108,10 @@
       <metrics statements="4" coveredstatements="4" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <file name="CustomError.ts" path="D:\Compass-challenge3\src\errors\CustomError.ts">
         <metrics statements="4" coveredstatements="4" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="13" count="33" type="stmt"/>
-        <line num="14" count="33" type="stmt"/>
-        <line num="15" count="33" type="stmt"/>
-        <line num="16" count="33" type="stmt"/>
+        <line num="13" count="34" type="stmt"/>
+        <line num="14" count="34" type="stmt"/>
+        <line num="15" count="34" type="stmt"/>
+        <line num="16" count="34" type="stmt"/>
       </file>
     </package>
     <package name="src.middleware">
@@ -119,18 +119,18 @@
       <file name="auth.ts" path="D:\Compass-challenge3\src\middleware\auth.ts">
         <metrics statements="15" coveredstatements="15" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
         <line num="6" count="7" type="stmt"/>
-        <line num="11" count="42" type="stmt"/>
-        <line num="13" count="42" type="cond" truecount="2" falsecount="0"/>
+        <line num="11" count="44" type="stmt"/>
+        <line num="13" count="44" type="cond" truecount="2" falsecount="0"/>
         <line num="14" count="5" type="stmt"/>
         <line num="19" count="5" type="stmt"/>
-        <line num="22" count="37" type="cond" truecount="2" falsecount="0"/>
+        <line num="22" count="39" type="cond" truecount="2" falsecount="0"/>
         <line num="23" count="5" type="stmt"/>
         <line num="28" count="5" type="stmt"/>
-        <line num="31" count="32" type="stmt"/>
-        <line num="33" count="32" type="stmt"/>
-        <line num="34" count="32" type="stmt"/>
-        <line num="38" count="27" type="stmt"/>
-        <line num="39" count="27" type="stmt"/>
+        <line num="31" count="34" type="stmt"/>
+        <line num="33" count="34" type="stmt"/>
+        <line num="34" count="34" type="stmt"/>
+        <line num="38" count="29" type="stmt"/>
+        <line num="39" count="29" type="stmt"/>
         <line num="41" count="5" type="stmt"/>
         <line num="46" count="5" type="stmt"/>
       </file>
@@ -156,12 +156,12 @@
       <metrics statements="14" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="6"/>
       <file name="EventsRepository.ts" path="D:\Compass-challenge3\src\respositories\EventsRepositories\EventsRepository.ts">
         <metrics statements="14" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="6"/>
-        <line num="6" count="10" type="stmt"/>
-        <line num="12" count="10" type="stmt"/>
-        <line num="19" count="2" type="stmt"/>
-        <line num="21" count="2" type="stmt"/>
-        <line num="28" count="2" type="stmt"/>
-        <line num="30" count="2" type="stmt"/>
+        <line num="6" count="11" type="stmt"/>
+        <line num="12" count="11" type="stmt"/>
+        <line num="19" count="3" type="stmt"/>
+        <line num="21" count="3" type="stmt"/>
+        <line num="28" count="3" type="stmt"/>
+        <line num="30" count="3" type="stmt"/>
         <line num="34" count="1" type="stmt"/>
         <line num="35" count="1" type="stmt"/>
         <line num="36" count="1" type="stmt"/>
@@ -195,29 +195,29 @@
       </file>
     </package>
     <package name="src.services.EventsServices">
-      <metrics statements="38" coveredstatements="36" conditionals="28" coveredconditionals="21" methods="5" coveredmethods="5"/>
+      <metrics statements="38" coveredstatements="38" conditionals="28" coveredconditionals="23" methods="5" coveredmethods="5"/>
       <file name="EventsServices.ts" path="D:\Compass-challenge3\src\services\EventsServices\EventsServices.ts">
-        <metrics statements="38" coveredstatements="36" conditionals="28" coveredconditionals="21" methods="5" coveredmethods="5"/>
-        <line num="11" count="11" type="stmt"/>
-        <line num="13" count="11" type="cond" truecount="2" falsecount="0"/>
+        <metrics statements="38" coveredstatements="38" conditionals="28" coveredconditionals="23" methods="5" coveredmethods="5"/>
+        <line num="11" count="12" type="stmt"/>
+        <line num="13" count="12" type="cond" truecount="2" falsecount="0"/>
         <line num="14" count="1" type="stmt"/>
-        <line num="21" count="10" type="stmt"/>
-        <line num="22" count="10" type="stmt"/>
-        <line num="27" count="10" type="stmt"/>
-        <line num="36" count="3" type="stmt"/>
-        <line num="37" count="3" type="stmt"/>
-        <line num="38" count="3" type="stmt"/>
-        <line num="39" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="21" count="11" type="stmt"/>
+        <line num="22" count="11" type="stmt"/>
+        <line num="27" count="11" type="stmt"/>
+        <line num="36" count="4" type="stmt"/>
+        <line num="37" count="4" type="stmt"/>
+        <line num="38" count="4" type="stmt"/>
+        <line num="39" count="4" type="cond" truecount="2" falsecount="0"/>
         <line num="40" count="1" type="stmt"/>
-        <line num="46" count="2" type="stmt"/>
-        <line num="47" count="2" type="cond" truecount="1" falsecount="1"/>
-        <line num="48" count="0" type="stmt"/>
-        <line num="50" count="2" type="stmt"/>
-        <line num="54" count="2" type="stmt"/>
-        <line num="59" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="46" count="3" type="stmt"/>
+        <line num="47" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="48" count="1" type="stmt"/>
+        <line num="50" count="3" type="stmt"/>
+        <line num="54" count="3" type="stmt"/>
+        <line num="59" count="3" type="cond" truecount="2" falsecount="0"/>
         <line num="60" count="1" type="stmt"/>
-        <line num="72" count="1" type="cond" truecount="3" falsecount="1"/>
-        <line num="73" count="0" type="stmt"/>
+        <line num="72" count="2" type="cond" truecount="4" falsecount="0"/>
+        <line num="73" count="1" type="stmt"/>
         <line num="84" count="1" type="stmt"/>
         <line num="87" count="2" type="stmt"/>
         <line num="88" count="2" type="stmt"/>
@@ -279,27 +279,27 @@
       </file>
       <file name="CheckEventsByDayValidator.ts" path="D:\Compass-challenge3\src\validation\EventsValidation\CheckEventsByDayValidator.ts">
         <metrics statements="9" coveredstatements="9" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3"/>
-        <line num="5" count="5" type="stmt"/>
-        <line num="15" count="5" type="stmt"/>
-        <line num="16" count="35" type="stmt"/>
-        <line num="24" count="5" type="stmt"/>
-        <line num="26" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="5" count="6" type="stmt"/>
+        <line num="15" count="6" type="stmt"/>
+        <line num="16" count="42" type="stmt"/>
+        <line num="24" count="6" type="stmt"/>
+        <line num="26" count="6" type="cond" truecount="2" falsecount="0"/>
         <line num="27" count="2" type="stmt"/>
         <line num="28" count="2" type="stmt"/>
         <line num="34" count="2" type="stmt"/>
-        <line num="37" count="3" type="stmt"/>
+        <line num="37" count="4" type="stmt"/>
       </file>
       <file name="CreateEventValidator.ts" path="D:\Compass-challenge3\src\validation\EventsValidation\CreateEventValidator.ts">
         <metrics statements="9" coveredstatements="9" conditionals="4" coveredconditionals="3" methods="3" coveredmethods="3"/>
-        <line num="6" count="11" type="stmt"/>
-        <line num="16" count="11" type="stmt"/>
-        <line num="22" count="77" type="stmt"/>
-        <line num="33" count="11" type="stmt"/>
-        <line num="38" count="11" type="cond" truecount="2" falsecount="0"/>
+        <line num="6" count="12" type="stmt"/>
+        <line num="16" count="12" type="stmt"/>
+        <line num="22" count="84" type="stmt"/>
+        <line num="33" count="12" type="stmt"/>
+        <line num="38" count="12" type="cond" truecount="2" falsecount="0"/>
         <line num="39" count="1" type="stmt"/>
         <line num="40" count="1" type="stmt"/>
         <line num="46" count="1" type="stmt"/>
-        <line num="49" count="10" type="stmt"/>
+        <line num="49" count="11" type="stmt"/>
       </file>
     </package>
     <package name="src.validation.UserValidation">
