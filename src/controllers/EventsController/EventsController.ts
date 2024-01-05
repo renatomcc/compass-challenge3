@@ -1,8 +1,7 @@
 import { Request, Response } from 'express'
 import EventsServices from '../../services/EventsServices/EventsServices'
 import IEvent from '../../interfaces/Event'
-import CustomError from '../../errors/CustomError'
-import jwt from 'jsonwebtoken'
+import { handleError } from '../../utils/errorHandler'
 
 export default class EventsController {
   static async createEvent(req: Request, res: Response) {
@@ -12,13 +11,7 @@ export default class EventsController {
       const result = await EventsServices.createEvent(newEvent, token)
       return res.status(200).json(result)
     } catch (err) {
-      if (err instanceof CustomError) {
-        return res
-          .status(err.statusCode)
-          .json({ type: err.type, errors: err.errors })
-      } else {
-        return res.status(500).json({ message: 'Internal Server Error' })
-      }
+      return handleError(err, res)
     }
   }
 
@@ -41,15 +34,10 @@ export default class EventsController {
       )
       return res.status(200).json(events)
     } catch (err) {
-      if (err instanceof CustomError) {
-        return res
-          .status(err.statusCode)
-          .json({ type: err.type, errors: err.errors })
-      } else {
-        return res.status(500).json({ message: 'Internal Server Error' })
-      }
+      return handleError(err, res)
     }
   }
+
   static async deleteEventsByDay(req: Request, res: Response) {
     try {
       const dayOfWeek: string = String(req.query.dayOfWeek)
@@ -57,15 +45,10 @@ export default class EventsController {
       const events = await EventsServices.deleteEventsByDay(dayOfWeek, token)
       return res.status(200).json({ deletedEvents: events })
     } catch (err) {
-      if (err instanceof CustomError) {
-        return res
-          .status(err.statusCode)
-          .json({ type: err.type, errors: err.errors })
-      } else {
-        return res.status(500).json({ message: 'Internal Server Error' })
-      }
+      return handleError(err, res)
     }
   }
+
   static async getEventById(req: Request, res: Response) {
     try {
       const eventId: string = req.params.id
@@ -73,15 +56,10 @@ export default class EventsController {
       const event = await EventsServices.getEventById(eventId, token)
       return res.status(200).json(event)
     } catch (err) {
-      if (err instanceof CustomError) {
-        return res
-          .status(err.statusCode)
-          .json({ type: err.type, errors: err.errors })
-      } else {
-        return res.status(500).json({ message: 'Internal Server Error' })
-      }
+      return handleError(err, res)
     }
   }
+
   static async deleteEventsById(req: Request, res: Response) {
     try {
       const eventId: string = req.params.id
@@ -89,13 +67,7 @@ export default class EventsController {
       const event = await EventsServices.deleteEventById(eventId, token)
       return res.status(204).json(event)
     } catch (err) {
-      if (err instanceof CustomError) {
-        return res
-          .status(err.statusCode)
-          .json({ type: err.type, errors: err.errors })
-      } else {
-        return res.status(500).json({ message: 'Internal Server Error' })
-      }
+      return handleError(err, res)
     }
   }
 }
