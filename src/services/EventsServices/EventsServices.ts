@@ -8,7 +8,8 @@ import jwt, { JwtPayload } from 'jsonwebtoken'
 
 export default class EventsServices {
   static async createEvent(payload: IEvent, token: string) {
-    const validationResponse = CreateEventValidator(payload)
+    const decodedToken = jwt.verify(token, process.env.SECRET!) as JwtPayload
+    const validationResponse = await CreateEventValidator(payload, decodedToken.userId)
 
     if (validationResponse.statusCode !== 200) {
       throw new CustomError(
@@ -18,7 +19,6 @@ export default class EventsServices {
       )
     }
 
-    const decodedToken = jwt.verify(token, process.env.SECRET!) as JwtPayload
     const newEvent = await EventsRepository.createEvent(
       payload,
       decodedToken.userId,

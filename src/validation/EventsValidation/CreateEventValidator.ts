@@ -1,8 +1,12 @@
 import Joi from 'joi'
 import IEvent from '../../interfaces/Event'
 import ValidationError from '../../errors/ValidationError'
+import Event from '../../model/Event'
 
-export default function CreateEventValidator(payload: IEvent) {
+export default async function CreateEventValidator(
+  payload: IEvent,
+  userId: string,
+) {
   const validDaysOfWeek = [
     'sunday',
     'monday',
@@ -44,6 +48,23 @@ export default function CreateEventValidator(payload: IEvent) {
     )
 
     return { type: 'Validation error', errors, statusCode: 400 }
+  }
+
+  const existingEvent = await Event.findOne({
+    dayOfWeek: payload.dayOfWeek,
+    description: payload.description,
+    userId: userId,
+  })
+
+  if (existingEvent) {
+    const errors: ValidationError[] = [
+      {
+        resource: 'event',
+        message: 'Event already registered in this day',
+      },
+    ]
+
+    return { type: 'Validation error', errors, statusCode: 422 }
   }
 
   return { statusCode: 200 }
