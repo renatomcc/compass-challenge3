@@ -9,6 +9,7 @@ import EventsServices from '../services/EventsServices/EventsServices'
 describe('Create event', () => {
   let createdUserId: string
   let createdEventId: string
+  let createdEventId2: string
   let eventData: IEvent
   let token: string
 
@@ -56,6 +57,9 @@ describe('Create event', () => {
     if (createdEventId) {
       await Event.findByIdAndDelete(createdEventId)
     }
+    if (createdEventId2) {
+      await Event.findByIdAndDelete(createdEventId2)
+    }
   })
 
   it('should create a new event', async () => {
@@ -72,6 +76,29 @@ describe('Create event', () => {
     expect(createEventResponse.body.description).toBeDefined
     expect(createEventResponse.body.dayOfWeek).toBeDefined
     expect(createEventResponse.body.userId).toBeDefined
+  })
+
+  it('should handle a request with duplicated event', async () => {
+    const createEventResponse = await request(app)
+      .post('/api/v1/events')
+      .send(eventData)
+      .set('Authorization', `Bearer ${token}`)
+
+    const createEventResponse2 = await request(app)
+      .post('/api/v1/events')
+      .send(eventData)
+      .set('Authorization', `Bearer ${token}`)
+
+    createdEventId = createEventResponse.body._id
+    createdEventId2 = createEventResponse2.body._id
+
+    expect(createEventResponse2.status).toBe(422)
+    expect(createEventResponse2.body).toBeDefined
+    expect(createEventResponse2.body.type).toEqual('Validation error')
+    expect(createEventResponse2.body.errors[0].resource).toEqual('event')
+    expect(createEventResponse2.body.errors[0].message).toEqual(
+      'Event already registered in this day',
+    )
   })
 
   it('should handle a request with no token', async () => {
