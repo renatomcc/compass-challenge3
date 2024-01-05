@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1704439081789" clover="3.2.0">
-  <project timestamp="1704439081789" name="All files">
-    <metrics statements="226" coveredstatements="220" conditionals="68" coveredconditionals="59" methods="43" coveredmethods="41" elements="337" coveredelements="320" complexity="0" loc="226" ncloc="226" packages="14" files="24" classes="24"/>
+<coverage generated="1704439239375" clover="3.2.0">
+  <project timestamp="1704439239375" name="All files">
+    <metrics statements="222" coveredstatements="216" conditionals="64" coveredconditionals="55" methods="43" coveredmethods="41" elements="329" coveredelements="312" complexity="0" loc="222" ncloc="222" packages="14" files="24" classes="24"/>
     <package name="src">
       <metrics statements="20" coveredstatements="14" conditionals="4" coveredconditionals="2" methods="4" coveredmethods="2"/>
       <file name="app.ts" path="D:\Compass-challenge3\src\app.ts">
@@ -72,26 +72,22 @@
       </file>
     </package>
     <package name="src.controllers.UserController">
-      <metrics statements="14" coveredstatements="14" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>
+      <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
       <file name="SignInController.ts" path="D:\Compass-challenge3\src\controllers\UserController\SignInController.ts">
-        <metrics statements="7" coveredstatements="7" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
-        <line num="8" count="10" type="stmt"/>
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="9" count="10" type="stmt"/>
         <line num="10" count="10" type="stmt"/>
-        <line num="11" count="6" type="stmt"/>
-        <line num="13" count="4" type="cond" truecount="2" falsecount="0"/>
-        <line num="14" count="3" type="stmt"/>
-        <line num="18" count="1" type="stmt"/>
+        <line num="11" count="10" type="stmt"/>
+        <line num="12" count="6" type="stmt"/>
+        <line num="14" count="4" type="stmt"/>
       </file>
       <file name="SignUpController.ts" path="D:\Compass-challenge3\src\controllers\UserController\SignUpController.ts">
-        <metrics statements="7" coveredstatements="7" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
-        <line num="8" count="19" type="stmt"/>
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="9" count="19" type="stmt"/>
         <line num="10" count="19" type="stmt"/>
-        <line num="11" count="11" type="stmt"/>
-        <line num="13" count="8" type="cond" truecount="2" falsecount="0"/>
-        <line num="14" count="7" type="stmt"/>
-        <line num="18" count="1" type="stmt"/>
+        <line num="11" count="19" type="stmt"/>
+        <line num="12" count="11" type="stmt"/>
+        <line num="14" count="8" type="stmt"/>
       </file>
     </package>
     <package name="src.errors">
@@ -260,9 +256,9 @@
       <file name="errorHandler.ts" path="D:\Compass-challenge3\src\utils\errorHandler.ts">
         <metrics statements="4" coveredstatements="4" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
         <line num="4" count="7" type="stmt"/>
-        <line num="5" count="15" type="cond" truecount="2" falsecount="0"/>
-        <line num="6" count="10" type="stmt"/>
-        <line num="10" count="5" type="stmt"/>
+        <line num="5" count="27" type="cond" truecount="2" falsecount="0"/>
+        <line num="6" count="20" type="stmt"/>
+        <line num="10" count="7" type="stmt"/>
       </file>
       <file name="validationResponse.ts" path="D:\Compass-challenge3\src\utils\validationResponse.ts">
         <metrics statements="2" coveredstatements="2" conditionals="5" coveredconditionals="4" methods="1" coveredmethods="1"/>
