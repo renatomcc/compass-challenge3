@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>9/9</span>
+                <span class='fraction'>0/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>0/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>9/9</span>
+                <span class='fraction'>0/9</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -105,7 +105,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -115,8 +115,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">42x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -124,26 +124,26 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import Joi from 'joi'
 import ValidationError from '../../errors/ValidationError'
 &nbsp;
-export default function CheckEventsByDayValidator(dayOfWeek: string) {
-  const validDaysOfWeek = [
+export default function <span class="fstat-no" title="function not covered" >CheckEventsByDayValidator(</span>dayOfWeek: string) {
+  const validDaysOfWeek = <span class="cstat-no" title="statement not covered" >[</span>
     'sunday',
     'monday',
     'tuesday',
@@ -153,8 +153,8 @@ export default function CheckEventsByDayValidator(dayOfWeek: string) {
     'saturday',
   ]
 &nbsp;
-  const schema = Joi.string()
-    .valid(...validDaysOfWeek.map((day) =&gt; day.toLowerCase()))
+  const schema = <span class="cstat-no" title="statement not covered" >Joi.string()</span>
+    .valid(...validDaysOfWeek.map(<span class="fstat-no" title="function not covered" >(d</span>ay) =&gt; <span class="cstat-no" title="statement not covered" >day.toLowerCase())</span>)
     .required()
     .messages({
       'string.base': '{{#label}} must be a string',
@@ -162,20 +162,20 @@ export default function CheckEventsByDayValidator(dayOfWeek: string) {
       'any.required': '{{#label}} is required',
     })
 &nbsp;
-  const validationResult = schema.validate(dayOfWeek.toLowerCase())
+  const validationResult = <span class="cstat-no" title="statement not covered" >schema.validate(dayOfWeek.toLowerCase())</span>
 &nbsp;
-  if (validationResult.error) {
-    const errors: ValidationError[] = validationResult.error.details.map(
-      (err) =&gt; ({
+<span class="cstat-no" title="statement not covered" >  if (validationResult.error) {</span>
+    const errors: ValidationError[] = <span class="cstat-no" title="statement not covered" >validationResult.error.details.map(</span>
+<span class="fstat-no" title="function not covered" >      (e</span>rr) =&gt; (<span class="cstat-no" title="statement not covered" >{</span>
         resource: 'dayOfWeek',
         message: err.message,
       }),
     )
 &nbsp;
-    return { type: 'Validation error', errors, statusCode: 400 }
+<span class="cstat-no" title="statement not covered" >    return { type: 'Validation error', errors, statusCode: 400 }</span>
   }
 &nbsp;
-  return { statusCode: 200 }
+<span class="cstat-no" title="statement not covered" >  return { statusCode: 200 }</span>
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -184,7 +184,7 @@ export default function CheckEventsByDayValidator(dayOfWeek: string) {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-01-05T06:43:21.368Z
+                at 2024-01-05T06:59:33.676Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>14/14</span>
+                <span class='fraction'>0/14</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>0/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>14/14</span>
+                <span class='fraction'>0/14</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -115,93 +115,93 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import IEvent from '../../interfaces/Event'
 import Event from '../../model/Event'
 &nbsp;
 export default class EventsRepository {
-  static async createEvent(event: IEvent, userId: string) {
-    const newEvent = await Event.create({
+<span class="fstat-no" title="function not covered" >  st</span>atic async createEvent(event: IEvent, userId: string) {
+    const newEvent = <span class="cstat-no" title="statement not covered" >await Event.create({</span>
       description: event.description,
       dayOfWeek: event.dayOfWeek,
       userId: userId,
     })
 &nbsp;
-    return newEvent
+<span class="cstat-no" title="statement not covered" >    return newEvent</span>
   }
-  static async getAllEventsByDay(
+<span class="fstat-no" title="function not covered" >  st</span>atic async getAllEventsByDay(
     query: Record&lt;string, any&gt;,
     number: number,
     skip: number,
   ) {
-    const events = await Event.find(query).skip(skip).limit(number)
+    const events = <span class="cstat-no" title="statement not covered" >await Event.find(query).skip(skip).limit(number)</span>
 &nbsp;
-    return events
+<span class="cstat-no" title="statement not covered" >    return events</span>
   }
 &nbsp;
-  static async getAllEventsByDayWithoutFilter(
+<span class="fstat-no" title="function not covered" >  st</span>atic async getAllEventsByDayWithoutFilter(
     dayOfWeek: string,
     userId: string,
   ) {
-    const events = await Event.find({ dayOfWeek, userId })
+    const events = <span class="cstat-no" title="statement not covered" >await Event.find({ dayOfWeek, userId })</span>
 &nbsp;
-    return events
+<span class="cstat-no" title="statement not covered" >    return events</span>
   }
 &nbsp;
-  static async deleteEventsByDay(dayOfWeek: string, userId: string) {
-    const eventsToDelete = await Event.find({ dayOfWeek, userId })
-    await Event.deleteMany({ dayOfWeek, userId })
-    return eventsToDelete
+<span class="fstat-no" title="function not covered" >  st</span>atic async deleteEventsByDay(dayOfWeek: string, userId: string) {
+    const eventsToDelete = <span class="cstat-no" title="statement not covered" >await Event.find({ dayOfWeek, userId })</span>
+<span class="cstat-no" title="statement not covered" >    await Event.deleteMany({ dayOfWeek, userId })</span>
+<span class="cstat-no" title="statement not covered" >    return eventsToDelete</span>
   }
-  static async getEventById(eventId: string) {
-    const event = await Event.findById(eventId)
-    return event
+<span class="fstat-no" title="function not covered" >  st</span>atic async getEventById(eventId: string) {
+    const event = <span class="cstat-no" title="statement not covered" >await Event.findById(eventId)</span>
+<span class="cstat-no" title="statement not covered" >    return event</span>
   }
-  static async deleteEventById(eventId: string, userId: string) {
-    const eventToDelete = await Event.findById(eventId)
-    await Event.deleteMany({ eventId, userId })
-    return eventToDelete
+<span class="fstat-no" title="function not covered" >  st</span>atic async deleteEventById(eventId: string, userId: string) {
+    const eventToDelete = <span class="cstat-no" title="statement not covered" >await Event.findById(eventId)</span>
+<span class="cstat-no" title="statement not covered" >    await Event.deleteMany({ eventId, userId })</span>
+<span class="cstat-no" title="statement not covered" >    return eventToDelete</span>
   }
 }
 &nbsp;</pre></td></tr></table></pre>
@@ -211,7 +211,7 @@ export default class EventsRepository {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-01-05T06:43:21.368Z
+                at 2024-01-05T06:59:33.676Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

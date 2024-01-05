@@ -1,11 +1,12 @@
+import jwt, { JwtPayload } from 'jsonwebtoken'
 import CustomError from '../../errors/CustomError'
 import IEvent from '../../interfaces/Event'
 import EventsRepository from '../../respositories/EventsRepositories/EventsRepository'
 import CreateEventValidator from '../../validation/EventsValidation/CreateEventValidator'
 import CheckEventsByDayValidator from '../../validation/EventsValidation/CheckEventsByDayValidator'
 import CheckEventByIdValidator from '../../validation/EventsValidation/CheckEventByIdValidator'
-import jwt, { JwtPayload } from 'jsonwebtoken'
 import { CheckEvents } from '../../utils/checkEvents'
+import { handleValidationResponse } from '../../utils/validationResponse'
 
 export default class EventsServices {
   static async createEvent(payload: IEvent, token: string) {
@@ -15,13 +16,7 @@ export default class EventsServices {
       decodedToken.userId,
     )
 
-    if (validationResponse.statusCode !== 200) {
-      throw new CustomError(
-        validationResponse.type || 'ValidationError',
-        validationResponse.errors,
-        validationResponse.statusCode,
-      )
-    }
+    handleValidationResponse(validationResponse)
 
     const newEvent = await EventsRepository.createEvent(
       payload,
@@ -41,13 +36,9 @@ export default class EventsServices {
     const validationResponse = CheckEventsByDayValidator(dayOfWeek)
     const decodedToken = jwt.verify(token, process.env.SECRET!) as JwtPayload
     const userId = decodedToken.userId
-    if (validationResponse.statusCode !== 200) {
-      throw new CustomError(
-        validationResponse.type || 'ValidationError',
-        validationResponse.errors,
-        validationResponse.statusCode,
-      )
-    }
+
+    handleValidationResponse(validationResponse)
+
     const eventsResponse = await CheckEvents(
       dayOfWeek,
       userId,
@@ -63,13 +54,9 @@ export default class EventsServices {
     const validationResponse = CheckEventsByDayValidator(payload)
     const decodedToken = jwt.verify(token, process.env.SECRET!) as JwtPayload
     const userId = decodedToken.userId
-    if (validationResponse.statusCode !== 200) {
-      throw new CustomError(
-        validationResponse.type || 'ValidationError',
-        validationResponse.errors,
-        validationResponse.statusCode,
-      )
-    }
+
+    handleValidationResponse(validationResponse)
+
     const deletedEvents = await EventsRepository.deleteEventsByDay(
       payload,
       userId,
@@ -79,13 +66,9 @@ export default class EventsServices {
 
   static async getEventById(payload: string, token: string) {
     const validationResponse = await CheckEventByIdValidator(payload)
-    if (validationResponse.statusCode !== 200) {
-      throw new CustomError(
-        validationResponse.type || 'ValidationError',
-        validationResponse.errors,
-        validationResponse.statusCode,
-      )
-    }
+
+    handleValidationResponse(validationResponse)
+
     return await EventsRepository.getEventById(payload)
   }
 
@@ -93,13 +76,9 @@ export default class EventsServices {
     const validationResponse = await CheckEventByIdValidator(payload)
     const decodedToken = jwt.verify(token, process.env.SECRET!) as JwtPayload
     const userId = decodedToken.userId
-    if (validationResponse.statusCode !== 200) {
-      throw new CustomError(
-        validationResponse.type || 'ValidationError',
-        validationResponse.errors,
-        validationResponse.statusCode,
-      )
-    }
+
+    handleValidationResponse(validationResponse)
+
     return await EventsRepository.deleteEventById(payload, userId)
   }
 }
