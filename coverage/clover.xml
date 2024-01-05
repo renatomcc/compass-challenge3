@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1704439239375" clover="3.2.0">
-  <project timestamp="1704439239375" name="All files">
-    <metrics statements="222" coveredstatements="216" conditionals="64" coveredconditionals="55" methods="43" coveredmethods="41" elements="329" coveredelements="312" complexity="0" loc="222" ncloc="222" packages="14" files="24" classes="24"/>
+<coverage generated="1704440237300" clover="3.2.0">
+  <project timestamp="1704440237300" name="All files">
+    <metrics statements="220" coveredstatements="214" conditionals="56" coveredconditionals="49" methods="43" coveredmethods="41" elements="319" coveredelements="304" complexity="0" loc="220" ncloc="220" packages="14" files="24" classes="24"/>
     <package name="src">
       <metrics statements="20" coveredstatements="14" conditionals="4" coveredconditionals="2" methods="4" coveredmethods="2"/>
       <file name="app.ts" path="D:\Compass-challenge3\src\app.ts">
@@ -212,29 +212,27 @@
       </file>
     </package>
     <package name="src.services.UserServices">
-      <metrics statements="17" coveredstatements="17" conditionals="12" coveredconditionals="10" methods="2" coveredmethods="2"/>
+      <metrics statements="15" coveredstatements="15" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>
       <file name="SignInService.ts" path="D:\Compass-challenge3\src\services\UserServices\SignInService.ts">
-        <metrics statements="12" coveredstatements="12" conditionals="8" coveredconditionals="7" methods="1" coveredmethods="1"/>
-        <line num="10" count="9" type="stmt"/>
-        <line num="12" count="9" type="cond" truecount="2" falsecount="0"/>
-        <line num="13" count="1" type="stmt"/>
-        <line num="20" count="8" type="stmt"/>
-        <line num="22" count="8" type="cond" truecount="2" falsecount="0"/>
-        <line num="23" count="1" type="stmt"/>
-        <line num="35" count="7" type="stmt"/>
-        <line num="40" count="7" type="cond" truecount="2" falsecount="0"/>
-        <line num="41" count="1" type="stmt"/>
-        <line num="53" count="6" type="stmt"/>
-        <line num="55" count="6" type="stmt"/>
-        <line num="62" count="6" type="stmt"/>
+        <metrics statements="11" coveredstatements="11" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
+        <line num="11" count="9" type="stmt"/>
+        <line num="12" count="9" type="stmt"/>
+        <line num="14" count="8" type="stmt"/>
+        <line num="16" count="8" type="cond" truecount="2" falsecount="0"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="29" count="7" type="stmt"/>
+        <line num="34" count="7" type="cond" truecount="2" falsecount="0"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="47" count="6" type="stmt"/>
+        <line num="49" count="6" type="stmt"/>
+        <line num="56" count="6" type="stmt"/>
       </file>
       <file name="SignUpService.ts" path="D:\Compass-challenge3\src\services\UserServices\SignUpService.ts">
-        <metrics statements="5" coveredstatements="5" conditionals="4" coveredconditionals="3" methods="1" coveredmethods="1"/>
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="8" count="18" type="stmt"/>
-        <line num="10" count="18" type="cond" truecount="2" falsecount="0"/>
-        <line num="11" count="7" type="stmt"/>
-        <line num="18" count="11" type="stmt"/>
-        <line num="19" count="11" type="stmt"/>
+        <line num="9" count="18" type="stmt"/>
+        <line num="11" count="11" type="stmt"/>
+        <line num="12" count="11" type="stmt"/>
       </file>
     </package>
     <package name="src.utils">
@@ -262,8 +260,8 @@
       </file>
       <file name="validationResponse.ts" path="D:\Compass-challenge3\src\utils\validationResponse.ts">
         <metrics statements="2" coveredstatements="2" conditionals="5" coveredconditionals="4" methods="1" coveredmethods="1"/>
-        <line num="13" count="26" type="cond" truecount="2" falsecount="0"/>
-        <line num="14" count="8" type="stmt"/>
+        <line num="13" count="53" type="cond" truecount="2" falsecount="0"/>
+        <line num="14" count="16" type="stmt"/>
       </file>
     </package>
     <package name="src.validation.EventsValidation">

@@ -4,18 +4,12 @@ import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 import CustomError from '../../errors/CustomError'
 import SignInValidator from '../../validation/UserValidation/SignInValidator'
+import { handleValidationResponse } from '../../utils/validationResponse'
 
 export default class SignInService {
   static async execute(payload: ISignInUser) {
     const validationResponse = SignInValidator(payload)
-
-    if (validationResponse.statusCode !== 200) {
-      throw new CustomError(
-        validationResponse.type || 'ValidationError',
-        validationResponse.errors,
-        validationResponse.statusCode,
-      )
-    }
+    handleValidationResponse(validationResponse)
 
     const existingUser = await SignInRepository.login(payload)
 
