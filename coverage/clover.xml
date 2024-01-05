@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1704339569266" clover="3.2.0">
-  <project timestamp="1704339569266" name="All files">
-    <metrics statements="216" coveredstatements="210" conditionals="77" coveredconditionals="64" methods="39" coveredmethods="37" elements="332" coveredelements="311" complexity="0" loc="216" ncloc="216" packages="13" files="21" classes="21"/>
+<coverage generated="1704419420566" clover="3.2.0">
+  <project timestamp="1704419420566" name="All files">
+    <metrics statements="228" coveredstatements="219" conditionals="89" coveredconditionals="72" methods="40" coveredmethods="38" elements="357" coveredelements="329" complexity="0" loc="228" ncloc="228" packages="13" files="21" classes="21"/>
     <package name="src">
       <metrics statements="20" coveredstatements="14" conditionals="4" coveredconditionals="2" methods="4" coveredmethods="2"/>
       <file name="app.ts" path="D:\Compass-challenge3\src\app.ts">
@@ -32,9 +32,9 @@
       </file>
     </package>
     <package name="src.controllers.EventsController">
-      <metrics statements="40" coveredstatements="40" conditionals="10" coveredconditionals="10" methods="5" coveredmethods="5"/>
+      <metrics statements="44" coveredstatements="43" conditionals="16" coveredconditionals="14" methods="5" coveredmethods="5"/>
       <file name="EventsController.ts" path="D:\Compass-challenge3\src\controllers\EventsController\EventsController.ts">
-        <metrics statements="40" coveredstatements="40" conditionals="10" coveredconditionals="10" methods="5" coveredmethods="5"/>
+        <metrics statements="44" coveredstatements="43" conditionals="16" coveredconditionals="14" methods="5" coveredmethods="5"/>
         <line num="9" count="12" type="stmt"/>
         <line num="10" count="12" type="stmt"/>
         <line num="11" count="12" type="stmt"/>
@@ -45,36 +45,40 @@
         <line num="20" count="1" type="stmt"/>
         <line num="26" count="4" type="stmt"/>
         <line num="27" count="4" type="stmt"/>
-        <line num="28" count="4" type="stmt"/>
-        <line num="29" count="4" type="stmt"/>
-        <line num="30" count="1" type="stmt"/>
-        <line num="32" count="3" type="cond" truecount="2" falsecount="0"/>
-        <line num="33" count="2" type="stmt"/>
-        <line num="37" count="1" type="stmt"/>
-        <line num="42" count="3" type="stmt"/>
-        <line num="43" count="3" type="stmt"/>
-        <line num="44" count="3" type="stmt"/>
-        <line num="45" count="3" type="stmt"/>
-        <line num="46" count="1" type="stmt"/>
-        <line num="48" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="29" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="32" count="4" type="stmt"/>
+        <line num="33" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="34" count="4" type="stmt"/>
+        <line num="35" count="4" type="stmt"/>
+        <line num="42" count="1" type="stmt"/>
+        <line num="44" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="45" count="2" type="stmt"/>
         <line num="49" count="1" type="stmt"/>
-        <line num="53" count="1" type="stmt"/>
-        <line num="58" count="4" type="stmt"/>
-        <line num="59" count="4" type="stmt"/>
-        <line num="60" count="4" type="stmt"/>
-        <line num="61" count="4" type="stmt"/>
-        <line num="62" count="1" type="stmt"/>
-        <line num="64" count="3" type="cond" truecount="2" falsecount="0"/>
-        <line num="65" count="2" type="stmt"/>
-        <line num="69" count="1" type="stmt"/>
-        <line num="74" count="4" type="stmt"/>
-        <line num="75" count="4" type="stmt"/>
-        <line num="76" count="4" type="stmt"/>
-        <line num="77" count="4" type="stmt"/>
-        <line num="78" count="1" type="stmt"/>
-        <line num="80" count="3" type="cond" truecount="2" falsecount="0"/>
-        <line num="81" count="2" type="stmt"/>
-        <line num="85" count="1" type="stmt"/>
+        <line num="54" count="3" type="stmt"/>
+        <line num="55" count="3" type="stmt"/>
+        <line num="56" count="3" type="stmt"/>
+        <line num="57" count="3" type="stmt"/>
+        <line num="58" count="1" type="stmt"/>
+        <line num="60" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="61" count="1" type="stmt"/>
+        <line num="65" count="1" type="stmt"/>
+        <line num="70" count="4" type="stmt"/>
+        <line num="71" count="4" type="stmt"/>
+        <line num="72" count="4" type="stmt"/>
+        <line num="73" count="4" type="stmt"/>
+        <line num="74" count="1" type="stmt"/>
+        <line num="76" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="77" count="2" type="stmt"/>
+        <line num="81" count="1" type="stmt"/>
+        <line num="86" count="4" type="stmt"/>
+        <line num="87" count="4" type="stmt"/>
+        <line num="88" count="4" type="stmt"/>
+        <line num="89" count="4" type="stmt"/>
+        <line num="90" count="1" type="stmt"/>
+        <line num="92" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="93" count="2" type="stmt"/>
+        <line num="97" count="1" type="stmt"/>
       </file>
     </package>
     <package name="src.controllers.UserController">
@@ -110,9 +114,9 @@
         <line num="16" count="33" type="stmt"/>
       </file>
     </package>
-    <package name="src.middlwares">
+    <package name="src.middleware">
       <metrics statements="15" coveredstatements="15" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
-      <file name="auth.ts" path="D:\Compass-challenge3\src\middlwares\auth.ts">
+      <file name="auth.ts" path="D:\Compass-challenge3\src\middleware\auth.ts">
         <metrics statements="15" coveredstatements="15" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
         <line num="6" count="7" type="stmt"/>
         <line num="11" count="42" type="stmt"/>
@@ -149,21 +153,23 @@
       </file>
     </package>
     <package name="src.respositories.EventsRepositories">
-      <metrics statements="12" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="5"/>
+      <metrics statements="14" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="6"/>
       <file name="EventsRepository.ts" path="D:\Compass-challenge3\src\respositories\EventsRepositories\EventsRepository.ts">
-        <metrics statements="12" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="5"/>
+        <metrics statements="14" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="6"/>
         <line num="6" count="10" type="stmt"/>
         <line num="12" count="10" type="stmt"/>
-        <line num="15" count="2" type="stmt"/>
-        <line num="16" count="2" type="stmt"/>
-        <line num="19" count="1" type="stmt"/>
-        <line num="20" count="1" type="stmt"/>
-        <line num="21" count="1" type="stmt"/>
-        <line num="24" count="1" type="stmt"/>
-        <line num="25" count="1" type="stmt"/>
-        <line num="28" count="1" type="stmt"/>
-        <line num="29" count="1" type="stmt"/>
-        <line num="30" count="1" type="stmt"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="21" count="2" type="stmt"/>
+        <line num="28" count="2" type="stmt"/>
+        <line num="30" count="2" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="36" count="1" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="43" count="1" type="stmt"/>
+        <line num="44" count="1" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
       </file>
     </package>
     <package name="src.respositories.UserRespositories">
@@ -183,47 +189,53 @@
       <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="Routes.ts" path="D:\Compass-challenge3\src\routes\Routes.ts">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="6" count="7" type="stmt"/>
-        <line num="8" count="7" type="stmt"/>
-        <line num="10" count="7" type="stmt"/>
+        <line num="7" count="7" type="stmt"/>
+        <line num="9" count="7" type="stmt"/>
+        <line num="11" count="7" type="stmt"/>
       </file>
     </package>
     <package name="src.services.EventsServices">
-      <metrics statements="32" coveredstatements="32" conditionals="22" coveredconditionals="17" methods="5" coveredmethods="5"/>
+      <metrics statements="38" coveredstatements="36" conditionals="28" coveredconditionals="21" methods="5" coveredmethods="5"/>
       <file name="EventsServices.ts" path="D:\Compass-challenge3\src\services\EventsServices\EventsServices.ts">
-        <metrics statements="32" coveredstatements="32" conditionals="22" coveredconditionals="17" methods="5" coveredmethods="5"/>
+        <metrics statements="38" coveredstatements="36" conditionals="28" coveredconditionals="21" methods="5" coveredmethods="5"/>
         <line num="11" count="11" type="stmt"/>
         <line num="13" count="11" type="cond" truecount="2" falsecount="0"/>
         <line num="14" count="1" type="stmt"/>
         <line num="21" count="10" type="stmt"/>
         <line num="22" count="10" type="stmt"/>
         <line num="27" count="10" type="stmt"/>
-        <line num="30" count="3" type="stmt"/>
-        <line num="31" count="3" type="stmt"/>
-        <line num="32" count="3" type="stmt"/>
-        <line num="33" count="3" type="cond" truecount="2" falsecount="0"/>
-        <line num="34" count="1" type="stmt"/>
-        <line num="40" count="2" type="stmt"/>
-        <line num="41" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="42" count="1" type="stmt"/>
-        <line num="53" count="1" type="stmt"/>
-        <line num="56" count="2" type="stmt"/>
-        <line num="57" count="2" type="stmt"/>
-        <line num="58" count="2" type="stmt"/>
+        <line num="36" count="3" type="stmt"/>
+        <line num="37" count="3" type="stmt"/>
+        <line num="38" count="3" type="stmt"/>
+        <line num="39" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="46" count="2" type="stmt"/>
+        <line num="47" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="50" count="2" type="stmt"/>
+        <line num="54" count="2" type="stmt"/>
         <line num="59" count="2" type="cond" truecount="2" falsecount="0"/>
         <line num="60" count="1" type="stmt"/>
-        <line num="66" count="1" type="stmt"/>
-        <line num="70" count="1" type="stmt"/>
-        <line num="73" count="3" type="stmt"/>
-        <line num="74" count="3" type="cond" truecount="2" falsecount="0"/>
-        <line num="75" count="2" type="stmt"/>
-        <line num="81" count="1" type="stmt"/>
-        <line num="84" count="3" type="stmt"/>
-        <line num="85" count="3" type="stmt"/>
-        <line num="86" count="3" type="stmt"/>
-        <line num="87" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="72" count="1" type="cond" truecount="3" falsecount="1"/>
+        <line num="73" count="0" type="stmt"/>
+        <line num="84" count="1" type="stmt"/>
+        <line num="87" count="2" type="stmt"/>
         <line num="88" count="2" type="stmt"/>
-        <line num="94" count="1" type="stmt"/>
+        <line num="89" count="2" type="stmt"/>
+        <line num="90" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="91" count="1" type="stmt"/>
+        <line num="97" count="1" type="stmt"/>
+        <line num="101" count="1" type="stmt"/>
+        <line num="104" count="3" type="stmt"/>
+        <line num="105" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="106" count="2" type="stmt"/>
+        <line num="112" count="1" type="stmt"/>
+        <line num="115" count="3" type="stmt"/>
+        <line num="116" count="3" type="stmt"/>
+        <line num="117" count="3" type="stmt"/>
+        <line num="118" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="119" count="2" type="stmt"/>
+        <line num="125" count="1" type="stmt"/>
       </file>
     </package>
     <package name="src.services.UserServices">

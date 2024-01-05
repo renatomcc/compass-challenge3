@@ -254,6 +254,26 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "number",
+            "in": "query",
+            "description": "Number of events to show per page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "responses": {
