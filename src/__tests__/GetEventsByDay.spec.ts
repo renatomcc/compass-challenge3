@@ -58,7 +58,7 @@ describe('Get Events by day', () => {
     dayOfWeek = 'sunday'
   })
 
-  afterAll(async () => {
+  afterEach(async () => {
     if (createdUserId) {
       await User.findByIdAndDelete(createdUserId)
     }
@@ -111,10 +111,12 @@ describe('Get Events by day', () => {
   })
 
   it('should handle a request with specific queries without any event', async () => {
-    await request(app)
+    const createEventResponse = await request(app)
       .post('/api/v1/events')
       .send(eventData)
       .set('Authorization', `Bearer ${token}`)
+
+    createdEventId = createEventResponse.body._id
 
     const description = 'invalidDescription'
     const number: number = 10

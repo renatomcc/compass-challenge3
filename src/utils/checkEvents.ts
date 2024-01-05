@@ -1,3 +1,4 @@
+import CustomError from '../errors/CustomError'
 import EventsRepository from '../respositories/EventsRepositories/EventsRepository'
 
 export const CheckEvents = async (
@@ -23,27 +24,29 @@ export const CheckEvents = async (
   )
 
   if (!events.length) {
-    return {
-      success: false,
-      error: [
+    throw new CustomError(
+      'Not Found',
+      [
         {
           resource: 'dayOfWeek',
           message: 'No events found on this day',
         },
       ],
-    }
+      404,
+    )
   }
 
   if (events.length && !filteredEvents.length) {
-    return {
-      success: false,
-      error: [
+    throw new CustomError(
+      'Not Found',
+      [
         {
           resource: 'query',
           message: 'No events found with those specific queries',
         },
       ],
-    }
+      404,
+    )
   }
 
   return filteredEvents

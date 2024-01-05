@@ -30,7 +30,7 @@ export default class EventsServices {
 
     return newEvent
   }
-  
+
   static async getAllEventsByDay(
     dayOfWeek: string,
     token: string,

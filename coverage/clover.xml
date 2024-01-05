@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1704436020608" clover="3.2.0">
-  <project timestamp="1704436020608" name="All files">
+<coverage generated="1704437001407" clover="3.2.0">
+  <project timestamp="1704437001407" name="All files">
     <metrics statements="235" coveredstatements="229" conditionals="91" coveredconditionals="78" methods="41" coveredmethods="39" elements="367" coveredelements="346" complexity="0" loc="235" ncloc="235" packages="14" files="22" classes="22"/>
     <package name="src">
       <metrics statements="20" coveredstatements="14" conditionals="4" coveredconditionals="2" methods="4" coveredmethods="2"/>
@@ -51,9 +51,9 @@
         <line num="33" count="5" type="cond" truecount="2" falsecount="0"/>
         <line num="34" count="5" type="stmt"/>
         <line num="35" count="5" type="stmt"/>
-        <line num="42" count="3" type="stmt"/>
-        <line num="44" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="45" count="1" type="stmt"/>
+        <line num="42" count="1" type="stmt"/>
+        <line num="44" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="45" count="3" type="stmt"/>
         <line num="49" count="1" type="stmt"/>
         <line num="54" count="3" type="stmt"/>
         <line num="55" count="3" type="stmt"/>
@@ -108,10 +108,10 @@
       <metrics statements="4" coveredstatements="4" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <file name="CustomError.ts" path="D:\Compass-challenge3\src\errors\CustomError.ts">
         <metrics statements="4" coveredstatements="4" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="13" count="33" type="stmt"/>
-        <line num="14" count="33" type="stmt"/>
-        <line num="15" count="33" type="stmt"/>
-        <line num="16" count="33" type="stmt"/>
+        <line num="13" count="35" type="stmt"/>
+        <line num="14" count="35" type="stmt"/>
+        <line num="15" count="35" type="stmt"/>
+        <line num="16" count="35" type="stmt"/>
       </file>
     </package>
     <package name="src.middleware">
@@ -210,7 +210,7 @@
         <line num="44" count="4" type="cond" truecount="2" falsecount="0"/>
         <line num="45" count="1" type="stmt"/>
         <line num="51" count="3" type="stmt"/>
-        <line num="59" count="3" type="stmt"/>
+        <line num="59" count="1" type="stmt"/>
         <line num="63" count="2" type="stmt"/>
         <line num="64" count="2" type="stmt"/>
         <line num="65" count="2" type="stmt"/>
@@ -260,17 +260,17 @@
       <metrics statements="11" coveredstatements="11" conditionals="8" coveredconditionals="8" methods="1" coveredmethods="1"/>
       <file name="checkEvents.ts" path="D:\Compass-challenge3\src\utils\checkEvents.ts">
         <metrics statements="11" coveredstatements="11" conditionals="8" coveredconditionals="8" methods="1" coveredmethods="1"/>
-        <line num="3" count="7" type="stmt"/>
-        <line num="10" count="3" type="stmt"/>
-        <line num="11" count="3" type="cond" truecount="2" falsecount="0"/>
-        <line num="12" count="1" type="stmt"/>
-        <line num="15" count="3" type="stmt"/>
-        <line num="19" count="3" type="stmt"/>
-        <line num="25" count="3" type="cond" truecount="2" falsecount="0"/>
-        <line num="26" count="1" type="stmt"/>
-        <line num="37" count="2" type="cond" truecount="4" falsecount="0"/>
-        <line num="38" count="1" type="stmt"/>
-        <line num="49" count="1" type="stmt"/>
+        <line num="4" count="7" type="stmt"/>
+        <line num="11" count="3" type="stmt"/>
+        <line num="12" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="16" count="3" type="stmt"/>
+        <line num="20" count="3" type="stmt"/>
+        <line num="26" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="39" count="2" type="cond" truecount="4" falsecount="0"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="52" count="1" type="stmt"/>
       </file>
     </package>
     <package name="src.validation.EventsValidation">
