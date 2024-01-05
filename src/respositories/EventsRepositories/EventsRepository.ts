@@ -11,12 +11,16 @@ export default class EventsRepository {
 
     return newEvent
   }
-  static async getAllEventsByDay(dayOfWeek: string, userId: string, number: number, skip: number) {
-    const events = await Event.find({ dayOfWeek, userId })
-      .skip(skip)
-      .limit(number)
+  static async getAllEventsByDay(
+    query: Record<string, any>,
+    number: number,
+    skip: number,
+  ) {
+    const events = await Event.find(query).skip(skip).limit(number)
+
     return events
   }
+
   static async deleteEventsByDay(dayOfWeek: string, userId: string) {
     const eventsToDelete = await Event.find({ dayOfWeek, userId })
     await Event.deleteMany({ dayOfWeek, userId })

@@ -25,6 +25,10 @@ export default class EventsController {
   static async getAllEventsByDay(req: Request, res: Response) {
     try {
       const dayOfWeek: string = String(req.query.dayOfWeek)
+      let description: string | undefined
+      if (req.query.description) {
+        description = String(req.query.description)
+      }
       const token: string = String(req.headers.authorization?.split(' ')[1])
       const { number = 10, page = 1 } = req.query
       const skip = (Number(page) - 1) * Number(number)
@@ -33,6 +37,7 @@ export default class EventsController {
         token,
         Number(number),
         skip,
+        description !== undefined ? description : null,
       )
       return res.status(200).json(events)
     } catch (err) {

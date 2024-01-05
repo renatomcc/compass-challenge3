@@ -26,7 +26,13 @@ export default class EventsServices {
 
     return newEvent
   }
-  static async getAllEventsByDay(dayOfWeek: string, token: string, number: number, skip: number) {
+  static async getAllEventsByDay(
+    dayOfWeek: string,
+    token: string,
+    number: number,
+    skip: number,
+    description: string | null,
+  ) {
     const validationResponse = CheckEventsByDayValidator(dayOfWeek)
     const decodedToken = jwt.verify(token, process.env.SECRET!) as JwtPayload
     const userId = decodedToken.userId
@@ -37,7 +43,11 @@ export default class EventsServices {
         validationResponse.statusCode,
       )
     }
-    const events = await EventsRepository.getAllEventsByDay(dayOfWeek, userId, number, skip);
+    const query: Record<string, any> = { dayOfWeek, userId }
+    if (description) {
+      query.description = { $regex: new RegExp(description, 'i') }
+    }
+    const events = await EventsRepository.getAllEventsByDay(query, number, skip)
     if (!events.length) {
       throw new CustomError(
         'Not Found',
